@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0B0E14" />
+
+  <title>Masthead — The AI marketing agency in a box</title>
+  <meta name="description" content="Masthead plugs into your store, decides what to promote, creates the posts and ads, publishes them, and shifts budget toward whatever sells — without hiring a single marketer." />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Masthead" />
+  <meta property="og:title" content="Masthead — The AI marketing agency in a box" />
+  <meta property="og:description" content="Marketing that runs itself. Masthead plugs into your store, creates the posts and ads, publishes them, and shifts budget toward whatever sells." />
+  <meta property="og:image" content="/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://themasthead.ai" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Masthead — The AI marketing agency in a box" />
+  <meta name="twitter:description" content="Marketing that runs itself. Masthead plugs into your store, creates the posts and ads, publishes them, and shifts budget toward whatever sells." />
+  <meta name="twitter:image" content="/og.png" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;1,500&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;1,500&display=swap" />
+
+  <style>
+    :root {
+      --bg: #0B0E14;
+      --surface: #141A24;
+      --border: #222C3B;
+      --text: #F4F6FA;
+      --text-secondary: #9AA6B8;
+      --muted: #5E6B80;
+      --accent: #48C6B2;
+      --accent-soft: rgba(72, 198, 178, 0.12);
+      --serif: 'Lora', Georgia, 'Times New Roman', serif;
+      --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --maxw: 1120px;
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    /* Subtle ambient glow behind hero */
+    body::before {
+      content: "";
+      position: fixed;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 700px;
+      background: radial-gradient(ellipse at center, rgba(72,198,178,0.10), transparent 62%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+    a { color: inherit; text-decoration: none; }
+
+    .kicker {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 18px;
+    }
+
+    h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.12; letter-spacing: -0.01em; }
+
+    .accent { color: var(--accent); }
+
+    /* ---------- Nav ---------- */
+    header.nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: saturate(160%) blur(12px);
+      background: rgba(11, 14, 20, 0.72);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+    header.nav.scrolled { border-bottom: 1px solid var(--border); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .wordmark {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 21px;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+    .wordmark .mark { width: 22px; height: 22px; display: block; }
+    .nav-cta {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 9px 18px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      color: var(--text);
+      transition: all 0.2s ease;
+    }
+    .nav-cta:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 96px 0 64px; text-align: center; }
+    .hero .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 6px 14px;
+      margin-bottom: 30px;
+    }
+    .badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+    .hero h1 {
+      font-size: clamp(40px, 7vw, 72px);
+      max-width: 14ch;
+      margin: 0 auto 26px;
+    }
+    .hero p.sub {
+      font-size: clamp(17px, 2.1vw, 20px);
+      color: var(--text-secondary);
+      max-width: 60ch;
+      margin: 0 auto 38px;
+      line-height: 1.55;
+    }
+
+    /* ---------- Waitlist form ---------- */
+    .waitlist {
+      display: flex;
+      gap: 10px;
+      max-width: 480px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .waitlist input[type="email"] {
+      flex: 1;
+      min-width: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 15px 17px;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+    .waitlist input::placeholder { color: var(--muted); }
+    .waitlist input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+    .btn {
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 600;
+      white-space: nowrap;
+      background: var(--accent);
+      color: #06231F;
+      border: none;
+      border-radius: 11px;
+      padding: 15px 24px;
+      cursor: pointer;
+      transition: transform 0.12s ease, filter 0.18s ease, box-shadow 0.18s ease;
+      box-shadow: 0 8px 24px -10px rgba(72,198,178,0.6);
+    }
+    .btn:hover { filter: brightness(1.06); box-shadow: 0 10px 30px -8px rgba(72,198,178,0.7); }
+    .btn:active { transform: translateY(1px); }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn:focus-visible, .nav-cta:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    .microline { font-size: 13px; color: var(--muted); margin-top: 14px; }
+    .form-msg { font-size: 14px; margin-top: 14px; min-height: 20px; font-weight: 500; }
+    .form-msg.error { color: #FF8B8B; }
+    .form-msg.success { color: var(--accent); }
+
+    .form-success {
+      display: none;
+      max-width: 480px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      text-align: center;
+      animation: pop 0.4s ease;
+    }
+    .form-success.show { display: block; }
+    .form-success .check {
+      width: 42px; height: 42px; margin: 0 auto 12px; display: block;
+    }
+    .form-success h3 { font-size: 20px; margin-bottom: 4px; }
+    .form-success p { font-size: 14px; color: var(--text-secondary); }
+    @keyframes pop { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+
+    /* ---------- Sections ---------- */
+    section { padding: 88px 0; position: relative; }
+    .section-divider { border-top: 1px solid var(--border); }
+
+    .problem { text-align: center; }
+    .problem h2 { font-size: clamp(28px, 4.5vw, 42px); max-width: 18ch; margin: 0 auto 18px; }
+    .problem p { color: var(--text-secondary); max-width: 56ch; margin: 0 auto; font-size: 18px; }
+
+    /* ---------- How it works ---------- */
+    .section-head { text-align: center; margin-bottom: 56px; }
+    .section-head h2 { font-size: clamp(28px, 4.5vw, 42px); }
+    .section-head p { color: var(--text-secondary); max-width: 52ch; margin: 14px auto 0; }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      counter-reset: step;
+    }
+    .flow .step {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      position: relative;
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+    .flow .step:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .flow .step .num {
+      font-family: var(--serif);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+    .flow .step .ico { margin: 14px 0 14px; color: var(--accent); }
+    .flow .step h4 { font-family: var(--sans); font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+    .flow .step p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+    .flow .arrow {
+      display: none;
+    }
+
+    /* ---------- Proof ---------- */
+    .proof { text-align: center; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 8px;
+    }
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 34px 18px;
+    }
+    .stat .figure {
+      font-family: var(--serif);
+      font-size: clamp(30px, 4.4vw, 46px);
+      font-weight: 600;
+      color: var(--accent);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .stat .label { font-size: 13px; color: var(--text-secondary); margin-top: 12px; line-height: 1.4; }
+    .stat .sublabel { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .proof .caption { font-size: 13px; color: var(--muted); margin-top: 28px; max-width: 64ch; margin-left: auto; margin-right: auto; }
+
+    /* ---------- Roadmap ---------- */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 30px 28px;
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .card .phase {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .card .phase .line { flex: 1; height: 1px; background: var(--border); }
+    .card h3 { font-size: 21px; margin-bottom: 12px; line-height: 1.25; }
+    .card p { font-size: 14.5px; color: var(--text-secondary); line-height: 1.6; }
+
+    /* ---------- Founder ---------- */
+    .founder { }
+    .founder-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 44px 44px;
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+    }
+    .founder-card .avatar {
+      flex-shrink: 0;
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #1c2531, #0f141c);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+    .founder-card .kicker { margin-bottom: 12px; }
+    .founder-card p { font-family: var(--serif); font-style: italic; font-size: 19px; line-height: 1.6; color: var(--text); }
+    .founder-card .name { font-family: var(--sans); font-style: normal; font-size: 14px; color: var(--text-secondary); margin-top: 14px; font-weight: 500; }
+
+    /* ---------- Final CTA ---------- */
+    .final { text-align: center; }
+    .final h2 { font-size: clamp(30px, 5vw, 50px); max-width: 16ch; margin: 0 auto 34px; }
+
+    /* ---------- Footer ---------- */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 38px 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .footer-inner .fm { font-family: var(--serif); font-size: 16px; color: var(--text); font-weight: 600; }
+    .footer-links { display: flex; gap: 22px; }
+    .footer-links a { color: var(--text-secondary); transition: color 0.18s ease; }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ---------- Reveal animation ---------- */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s cubic-bezier(.2,.7,.2,1), transform 0.7s cubic-bezier(.2,.7,.2,1); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 900px) {
+      .flow { grid-template-columns: repeat(2, 1fr); }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .cards { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      section { padding: 64px 0; }
+      .hero { padding: 64px 0 48px; }
+      .flow { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      .waitlist { flex-direction: column; }
+      .btn { width: 100%; }
+      .founder-card { flex-direction: column; padding: 30px 24px; gap: 18px; }
+      .nav-cta { display: none; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="#top" class="wordmark" aria-label="Masthead home">
+        <svg class="mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="2" y="3" width="20" height="3.4" rx="1.2" fill="#48C6B2"/>
+          <rect x="2" y="10" width="13" height="2.2" rx="1.1" fill="#9AA6B8"/>
+          <rect x="2" y="15" width="20" height="2.2" rx="1.1" fill="#5E6B80"/>
+          <rect x="2" y="19.5" width="9" height="2.2" rx="1.1" fill="#5E6B80"/>
+        </svg>
+        Masthead
+      </a>
+      <a href="#join" class="nav-cta">Join the waitlist</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero" id="join">
+      <div class="wrap">
+        <span class="badge reveal"><span class="dot"></span> Live proof · 836K organic views in week one</span>
+        <h1 class="reveal">The AI marketing agency in a box.</h1>
+        <p class="sub reveal">Masthead plugs into your store, decides what to promote, creates the posts and ads, publishes them, and shifts budget toward whatever sells — without hiring a single marketer.</p>
+
+        <form class="waitlist reveal" id="waitlist-form" novalidate>
+          <label for="email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Email address</label>
+          <input type="email" id="email" name="email" placeholder="you@yourstore.com" autocomplete="email" required />
+          <button type="submit" class="btn" id="submit-btn">Join the waitlist</button>
+        </form>
+        <div class="form-success reveal" id="form-success" role="status" aria-live="polite">
+          <svg class="check" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+            <circle cx="22" cy="22" r="21" stroke="#48C6B2" stroke-width="1.5"/>
+            <path d="M14 22.5l5.5 5.5L31 16.5" stroke="#48C6B2" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h3>You're on the list.</h3>
+          <p>We'll be in touch as early access opens for your store.</p>
+        </div>
+        <p class="microline reveal" id="microline">Early access for Shopify &amp; Shoptet stores. No spam.</p>
+        <p class="form-msg" id="form-msg" role="alert" aria-live="assertive"></p>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="problem section-divider">
+      <div class="wrap">
+        <span class="kicker reveal">The problem</span>
+        <h2 class="reveal">Great marketing is priced out of reach.</h2>
+        <p class="reveal">Good marketers and agencies cost thousands a month, so most small shops either overpay — or market by guesswork.</p>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section-divider">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="kicker reveal">How it works</span>
+          <h2 class="reveal">An autonomous marketing loop.</h2>
+          <p class="reveal">Five steps, running continuously — with a human only approving, not doing the work.</p>
+        </div>
+        <div class="flow">
+          <div class="step reveal">
+            <span class="num">01</span>
+            <div class="ico" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0Z"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/></svg>
+            </div>
+            <h4>Sources &amp; trends</h4>
+            <p>Monitors trends, news and brand sources for what's worth promoting.</p>
+          </div>
+          <div class="step reveal">
+            <span class="num">02</span>
+            <div class="ico" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="3.2"/></svg>
+            </div>
+            <h4>AI generation</h4>
+            <p>Writes the copy, builds the carousel, caption and CTA with LLMs.</p>
+          </div>
+          <div class="step reveal">
+            <span class="num">03</span>
+            <div class="ico" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <h4>Human approval</h4>
+            <p>Sends the draft for a one-tap approval in Telegram before anything ships.</p>
+          </div>
+          <div class="step reveal">
+            <span class="num">04</span>
+            <div class="ico" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4 20-7Z"/><path d="M22 2 11 13"/></svg>
+            </div>
+            <h4>Publish</h4>
+            <p>Posts automatically to Instagram &amp; Facebook via the Meta Graph API.</p>
+          </div>
+          <div class="step reveal">
+            <span class="num">05</span>
+            <div class="ico" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 3-4 4 3 5-7"/></svg>
+            </div>
+            <h4>Learn &amp; optimise</h4>
+            <p>Reports performance back and feeds every result into the next round.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROOF -->
+    <section class="proof section-divider">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="kicker reveal">Proof</span>
+          <h2 class="reveal">The engine already works.</h2>
+        </div>
+        <div class="stats">
+          <div class="stat reveal">
+            <div class="figure">836K</div>
+            <div class="label">organic views</div>
+            <div class="sublabel">in 7 days</div>
+          </div>
+          <div class="stat reveal">
+            <div class="figure">72,666</div>
+            <div class="label">accounts reached</div>
+            <div class="sublabel">+497% week over week</div>
+          </div>
+          <div class="stat reveal">
+            <div class="figure">5,269</div>
+            <div class="label">interactions</div>
+            <div class="sublabel">likes, saves, shares</div>
+          </div>
+          <div class="stat reveal">
+            <div class="figure">€0</div>
+            <div class="label">ad spend</div>
+            <div class="sublabel">100% organic</div>
+          </div>
+        </div>
+        <p class="caption reveal">Live test account, first week. Organic results — proof the engine works, not a client guarantee.</p>
+      </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section class="section-divider">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="kicker reveal">Roadmap</span>
+          <h2 class="reveal">From content engine to a marketing operating system.</h2>
+        </div>
+        <div class="cards">
+          <div class="card reveal">
+            <div class="phase">Phase 1 <span class="line"></span></div>
+            <h3>Plugged into your store.</h3>
+            <p>Connects to Shopify &amp; Shoptet, reads live inventory, builds and publishes campaigns for what's overstocked — and stops promoting what's sold out.</p>
+          </div>
+          <div class="card reveal">
+            <div class="phase">Phase 2 <span class="line"></span></div>
+            <h3>Closed-loop performance marketing.</h3>
+            <p>Deploys content as Meta ads, splits the daily budget, A/B tests, and moves spend to the winners automatically. The owner never lifts a finger.</p>
+          </div>
+          <div class="card reveal">
+            <div class="phase">Phase 3 <span class="line"></span></div>
+            <h3>A data network across every store.</h3>
+            <p>With 1,000+ stores, Masthead learns across all of them — a winning format in one market is applied to others before competitors notice.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOUNDER -->
+    <section class="founder section-divider">
+      <div class="wrap">
+        <div class="founder-card reveal">
+          <div class="avatar" aria-hidden="true">MK</div>
+          <div>
+            <span class="kicker">Founder</span>
+            <p>Built by Matyáš Kouřil. I own an e-shop, burned hundreds of thousands of crowns in Meta Ads, and got tired of how slow and expensive routine marketing is — so I built Masthead to solve it for my own business. Now I'm scaling it for every e-shop on the planet.</p>
+            <div class="name">Matyáš Kouřil · Founder, Masthead</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final section-divider">
+      <div class="wrap">
+        <span class="kicker reveal">Early access</span>
+        <h2 class="reveal">Marketing that runs itself is coming.</h2>
+
+        <form class="waitlist reveal" id="waitlist-form-2" novalidate>
+          <label for="email2" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Email address</label>
+          <input type="email" id="email2" name="email" placeholder="you@yourstore.com" autocomplete="email" required />
+          <button type="submit" class="btn" id="submit-btn-2">Join the waitlist</button>
+        </form>
+        <div class="form-success reveal" id="form-success-2" role="status" aria-live="polite">
+          <svg class="check" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+            <circle cx="22" cy="22" r="21" stroke="#48C6B2" stroke-width="1.5"/>
+            <path d="M14 22.5l5.5 5.5L31 16.5" stroke="#48C6B2" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h3>You're on the list.</h3>
+          <p>We'll be in touch as early access opens for your store.</p>
+        </div>
+        <p class="microline reveal">Early access for Shopify &amp; Shoptet stores. No spam.</p>
+        <p class="form-msg" id="form-msg-2" role="alert" aria-live="assertive"></p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap footer-inner">
+      <span class="fm">Masthead</span>
+      <span>© 2026 Masthead. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="mailto:hello@themasthead.ai">hello@themasthead.ai</a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav border on scroll
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Waitlist handling
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    function wireForm(formId, btnId, msgId, successId, micro) {
+      const form = document.getElementById(formId);
+      if (!form) return;
+      const input = form.querySelector('input[type="email"]');
+      const btn = document.getElementById(btnId);
+      const msg = document.getElementById(msgId);
+      const success = document.getElementById(successId);
+
+      form.addEventListener('submit', async (ev) => {
+        ev.preventDefault();
+        msg.textContent = '';
+        msg.className = 'form-msg';
+        const email = input.value.trim();
+
+        if (!EMAIL_RE.test(email)) {
+          msg.textContent = 'Please enter a valid email address.';
+          msg.classList.add('error');
+          input.focus();
+          return;
+        }
+
+        btn.disabled = true;
+        const original = btn.textContent;
+        btn.textContent = 'Joining…';
+
+        try {
+          const res = await fetch('/api/waitlist', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, source: formId === 'waitlist-form' ? 'hero' : 'final-cta' })
+          });
+
+          if (res.ok) {
+            form.style.display = 'none';
+            if (micro) { const m = micro(); if (m) m.style.display = 'none'; }
+            success.classList.add('show');
+          } else {
+            const data = await res.json().catch(() => ({}));
+            msg.textContent = data.error || 'Something went wrong. Please try again.';
+            msg.classList.add('error');
+            btn.disabled = false;
+            btn.textContent = original;
+          }
+        } catch (err) {
+          msg.textContent = 'Network error. Please check your connection and try again.';
+          msg.classList.add('error');
+          btn.disabled = false;
+          btn.textContent = original;
+        }
+      });
+    }
+
+    wireForm('waitlist-form', 'submit-btn', 'form-msg', 'form-success', () => document.getElementById('microline'));
+    wireForm('waitlist-form-2', 'submit-btn-2', 'form-msg-2', 'form-success-2', null);
+  </script>
+
+</body>
+</html>
