@@ -4,27 +4,69 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#080907" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="application-name" content="Masthead" />
+  <meta name="author" content="Masthead" />
 
   <title>Masthead - AI marketing operator for e-commerce</title>
-  <meta name="description" content="Masthead connects to your store, understands inventory, creates organic posts and ads, routes them through approval, publishes through Meta, and learns from performance." />
+  <meta name="description" content="Masthead is a managed AI marketing operator for e-commerce pilots: product-aware content briefs, approved posts, Meta campaign prep and weekly learning loops." />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Masthead" />
   <meta property="og:title" content="Masthead - AI marketing operator for e-commerce" />
-  <meta property="og:description" content="A managed AI marketing operator that turns store inventory into approved content, Meta campaigns and weekly learning loops." />
-  <meta property="og:image" content="/og.png" />
+  <meta property="og:description" content="Managed AI marketing pilots for e-commerce: product-aware content, approval, Meta campaign prep and a learning loop for every run." />
+  <meta property="og:url" content="https://themasthead.cz/" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="cs_CZ" />
+  <meta property="og:image" content="https://themasthead.cz/og.png?v=4" />
+  <meta property="og:image:secure_url" content="https://themasthead.cz/og.png?v=4" />
+  <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:url" content="https://themasthead.cz" />
+  <meta property="og:image:alt" content="Masthead - AI marketing operator for e-commerce stores." />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Masthead - AI marketing operator for e-commerce" />
-  <meta name="twitter:description" content="A managed AI marketing operator that turns store inventory into approved content, Meta campaigns and weekly learning loops." />
-  <meta name="twitter:image" content="/og.png" />
+  <meta name="twitter:description" content="Managed AI marketing pilots for e-commerce: product-aware content, approval, Meta campaign prep and a learning loop for every run." />
+  <meta name="twitter:image" content="https://themasthead.cz/og.png?v=4" />
+  <meta name="twitter:image:alt" content="Masthead - AI marketing operator for e-commerce stores." />
 
-  <link rel="canonical" href="https://themasthead.cz" />
+  <link rel="canonical" href="https://themasthead.cz/" />
+  <link rel="alternate" hreflang="en" href="https://themasthead.cz/" />
+  <link rel="alternate" hreflang="cs" href="https://themasthead.cz/?lang=cs" />
+  <link rel="alternate" hreflang="x-default" href="https://themasthead.cz/" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/favicon.svg" />
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://themasthead.cz/#organization",
+          "name": "Masthead",
+          "url": "https://themasthead.cz/",
+          "logo": "https://themasthead.cz/favicon.svg",
+          "founder": {
+            "@type": "Person",
+            "name": "Matyáš Kouřil"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://themasthead.cz/#website",
+          "url": "https://themasthead.cz/",
+          "name": "Masthead",
+          "description": "Managed AI marketing pilots for e-commerce: product-aware content, approval, Meta campaign prep and a learning loop for every run.",
+          "publisher": {
+            "@id": "https://themasthead.cz/#organization"
+          },
+          "inLanguage": ["en", "cs"]
+        }
+      ]
+    }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -199,7 +241,11 @@
       margin-bottom: 24px;
     }
     .hero-status span { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
-    .hero h1 span { color: var(--accent); }
+    .hero-title-line,
+    .hero-title-accent {
+      display: block;
+    }
+    .hero-title-accent { color: var(--accent); }
     .hero-lede {
       max-width: 660px;
       margin: 26px 0 34px;
@@ -466,8 +512,8 @@
       <div class="wrap">
         <div class="hero-copy">
           <div class="hero-status reveal"><span></span> <span data-i18n="heroStatus">Private beta for Shopify and Shoptet stores</span></div>
-          <h1 class="reveal" data-i18n-html="heroTitle">AI marketing operator for <span>e-commerce.</span></h1>
-          <p class="hero-lede reveal" data-i18n="heroLede">Masthead connects to a store, understands what should sell now, generates approved posts and ads, publishes through Meta, then learns from performance.</p>
+          <h1 class="reveal" data-i18n-html="heroTitle"><span class="hero-title-line">AI marketing</span><span class="hero-title-line">operator for</span><span class="hero-title-accent">e-commerce.</span></h1>
+          <p class="hero-lede reveal" data-i18n="heroLede">Masthead helps e-commerce teams turn product context into approved organic posts, campaign-ready creative and a learning loop for the next run.</p>
 
           <form class="waitlist reveal" id="waitlist-form" novalidate>
             <label for="email" class="sr-only" data-i18n="emailLabel">Email address</label>
@@ -525,45 +571,45 @@
       <div class="wrap">
         <div class="section-head">
           <div>
-            <span class="eyebrow reveal" data-i18n="operatorEyebrow">What it does</span>
-            <h2 class="reveal" data-i18n="operatorTitle">The work of a lean marketing team, running as software.</h2>
+            <span class="eyebrow reveal" data-i18n="operatorEyebrow">How pilots work</span>
+            <h2 class="reveal" data-i18n="operatorTitle">A managed content loop first. A software platform as the repeatable pieces harden.</h2>
           </div>
-          <p class="reveal" data-i18n="operatorIntro">The first pilots are hands-on by design: every store gets a tailored setup, approval stays controlled, and the system learns from real operating context.</p>
+          <p class="reveal" data-i18n="operatorIntro">Early pilots are deliberately hands-on: we map the store, prepare structured briefs, generate content options, keep approval controlled and turn each run into product learning.</p>
         </div>
         <div class="operator-grid">
           <article class="operator-card reveal">
             <div>
               <span class="num">01</span>
-              <h3 data-i18n="operatorCard1Title">Reads the store</h3>
-              <p data-i18n="operatorCard1Text">Catalog, stock, product priority, margins, blocked topics and brand voice live under one client profile.</p>
+              <h3 data-i18n="operatorCard1Title">Map the store</h3>
+              <p data-i18n="operatorCard1Text">Products, audience, current priorities, stock context, blocked topics and brand rules are captured before the first run.</p>
             </div>
           </article>
           <article class="operator-card reveal">
             <div>
               <span class="num">02</span>
-              <h3 data-i18n="operatorCard2Title">Chooses the angle</h3>
-              <p data-i18n="operatorCard2Text">Product spotlight, category guide, campaign offer, evergreen tips or news reaction. Not every business is a news feed.</p>
+              <h3 data-i18n="operatorCard2Title">Choose safe formats</h3>
+              <p data-i18n="operatorCard2Text">Product spotlights, category guides, campaign offers, evergreen tips or news-style posts are selected based on what the store can support.</p>
             </div>
           </article>
           <article class="operator-card reveal">
             <div>
               <span class="num">03</span>
-              <h3 data-i18n="operatorCard3Title">Creates the post</h3>
-              <p data-i18n="operatorCard3Text">Carousel structure, caption, CTA, image search and visual checks are generated from a structured brief.</p>
+              <h3 data-i18n="operatorCard3Title">Generate draft sets</h3>
+              <p data-i18n="operatorCard3Text">The app helps prepare carousel outlines, captions, CTAs and image direction from a structured brief, with manual QA during pilots.</p>
             </div>
           </article>
           <article class="operator-card reveal">
             <div>
               <span class="num">04</span>
-              <h3 data-i18n="operatorCard4Title">Routes approval</h3>
-              <p data-i18n="operatorCard4Text">Human approval stays in the loop before anything goes live. Pilots stay safe by default.</p>
+              <h3 data-i18n="operatorCard4Title">Approve before output</h3>
+              <p data-i18n="operatorCard4Text">Owners review the important decisions before anything is published or prepared for a campaign.</p>
             </div>
           </article>
           <article class="operator-card reveal">
             <div>
               <span class="num">05</span>
-              <h3 data-i18n="operatorCard5Title">Learns what works</h3>
-              <p data-i18n="operatorCard5Text">Every run becomes structured evidence for the next creative, campaign and store decision.</p>
+              <h3 data-i18n="operatorCard5Title">Record the learning</h3>
+              <p data-i18n="operatorCard5Text">Each run creates a short evidence log so the next batch is sharper and the future platform is built on real operating data.</p>
             </div>
           </article>
         </div>
@@ -700,14 +746,16 @@
     const TRANSLATIONS = {
       en: {
         metaTitle: "Masthead - AI marketing operator for e-commerce",
-        metaDescription: "Masthead connects to your store, understands inventory, creates organic posts and ads, routes them through approval, publishes through Meta, and learns from performance.",
+        metaDescription: "Masthead is a managed AI marketing operator for e-commerce pilots: product-aware content briefs, approved posts, Meta campaign prep and weekly learning loops.",
+        metaImageAlt: "Masthead - AI marketing operator for e-commerce stores.",
+        ogLocale: "en_US",
         navProof: "Proof",
         navOperator: "Operator",
         navRoadmap: "Roadmap",
         navCta: "Join beta",
         heroStatus: "Private beta for Shopify and Shoptet stores",
-        heroTitle: "AI marketing operator for <span>e-commerce.</span>",
-        heroLede: "Masthead connects to a store, understands what should sell now, generates approved posts and ads, publishes through Meta, then learns from performance.",
+        heroTitle: "<span class=\"hero-title-line\">AI marketing</span><span class=\"hero-title-line\">operator for</span><span class=\"hero-title-accent\">e-commerce.</span>",
+        heroLede: "Masthead helps e-commerce teams turn product context into approved organic posts, campaign-ready creative and a learning loop for the next run.",
         emailLabel: "Email address",
         emailPlaceholder: "you@yourstore.com",
         heroButton: "Request access",
@@ -727,19 +775,19 @@
         proofInteractionsNote: "likes, saves, shares",
         proofPaidLabel: "Paid media",
         proofPaidNote: "organic test account",
-        operatorEyebrow: "What it does",
-        operatorTitle: "The work of a lean marketing team, running as software.",
-        operatorIntro: "The first pilots are hands-on by design: every store gets a tailored setup, approval stays controlled, and the system learns from real operating context.",
-        operatorCard1Title: "Reads the store",
-        operatorCard1Text: "Catalog, stock, product priority, margins, blocked topics and brand voice live under one client profile.",
-        operatorCard2Title: "Chooses the angle",
-        operatorCard2Text: "Product spotlight, category guide, campaign offer, evergreen tips or news reaction. Not every business is a news feed.",
-        operatorCard3Title: "Creates the post",
-        operatorCard3Text: "Carousel structure, caption, CTA, image search and visual checks are generated from a structured brief.",
-        operatorCard4Title: "Routes approval",
-        operatorCard4Text: "Human approval stays in the loop before anything goes live. Pilots stay safe by default.",
-        operatorCard5Title: "Learns what works",
-        operatorCard5Text: "Every run becomes structured evidence for the next creative, campaign and store decision.",
+        operatorEyebrow: "How pilots work",
+        operatorTitle: "A managed content loop first. A software platform as the repeatable pieces harden.",
+        operatorIntro: "Early pilots are deliberately hands-on: we map the store, prepare structured briefs, generate content options, keep approval controlled and turn each run into product learning.",
+        operatorCard1Title: "Map the store",
+        operatorCard1Text: "Products, audience, current priorities, stock context, blocked topics and brand rules are captured before the first run.",
+        operatorCard2Title: "Choose safe formats",
+        operatorCard2Text: "Product spotlights, category guides, campaign offers, evergreen tips or news-style posts are selected based on what the store can support.",
+        operatorCard3Title: "Generate draft sets",
+        operatorCard3Text: "The app helps prepare carousel outlines, captions, CTAs and image direction from a structured brief, with manual QA during pilots.",
+        operatorCard4Title: "Approve before output",
+        operatorCard4Text: "Owners review the important decisions before anything is published or prepared for a campaign.",
+        operatorCard5Title: "Record the learning",
+        operatorCard5Text: "Each run creates a short evidence log so the next batch is sharper and the future platform is built on real operating data.",
         whyEyebrow: "Why this matters",
         whyTitle: "Most e-commerce stores do not need more tools. They need execution.",
         whyBullet1Title: "Agencies are expensive and slow.",
@@ -785,14 +833,16 @@
       },
       cs: {
         metaTitle: "Masthead - AI marketing operator pro e-commerce",
-        metaDescription: "Masthead se napojí na e-shop, rozumí produktům a skladu, tvoří organické posty i reklamy, posílá je ke schválení, publikuje přes Meta a učí se z výsledků.",
+        metaDescription: "Masthead je řízený AI marketing operator pro e-commerce piloty: produktové briefy, schválené posty, příprava Meta kampaní a týdenní learning loop.",
+        metaImageAlt: "Masthead - AI marketing operator pro e-commerce.",
+        ogLocale: "cs_CZ",
         navProof: "Výsledky",
         navOperator: "Operator",
         navRoadmap: "Roadmapa",
         navCta: "Do bety",
         heroStatus: "Privátní beta pro Shopify a Shoptet e-shopy",
-        heroTitle: "AI marketing operator pro <span>e-commerce.</span>",
-        heroLede: "Masthead se napojí na e-shop, pochopí co má zrovna prodávat, vytvoří schválené posty a reklamy, publikuje přes Meta a učí se z výkonu.",
+        heroTitle: "<span class=\"hero-title-line\">AI marketing</span><span class=\"hero-title-line\">operator pro</span><span class=\"hero-title-accent\">e-commerce.</span>",
+        heroLede: "Masthead pomáhá e-commerce týmům měnit produktový kontext na schválené organické posty, kreativu připravenou pro kampaně a learning loop pro další run.",
         emailLabel: "E-mailová adresa",
         emailPlaceholder: "vy@vaseshop.cz",
         heroButton: "Požádat o přístup",
@@ -812,19 +862,19 @@
         proofInteractionsNote: "lajky, uložení, sdílení",
         proofPaidLabel: "Placená média",
         proofPaidNote: "interní testovací účet",
-        operatorEyebrow: "Co dělá",
-        operatorTitle: "Práce štíhlého marketingového týmu, běžící jako software.",
-        operatorIntro: "První piloty jsou záměrně hands-on: každý e-shop dostane vlastní nastavení, schvalování zůstává pod kontrolou a systém se učí z reálného provozu.",
-        operatorCard1Title: "Čte e-shop",
-        operatorCard1Text: "Katalog, sklad, priorita produktů, marže, zakázaná témata a tone of voice žijí v jednom klientském profilu.",
-        operatorCard2Title: "Volí úhel",
-        operatorCard2Text: "Produktový spotlight, průvodce kategorií, kampaňová nabídka, evergreen tipy nebo reakce na novinky. Ne každá firma je news feed.",
-        operatorCard3Title: "Tvoří post",
-        operatorCard3Text: "Struktura carouselu, caption, CTA, hledání obrázků a vizuální kontroly vznikají ze strukturovaného briefu.",
-        operatorCard4Title: "Řeší schválení",
-        operatorCard4Text: "Člověk zůstává ve smyčce před tím, než cokoliv vyjde ven. Piloty jsou bezpečné by default.",
-        operatorCard5Title: "Učí se z výkonu",
-        operatorCard5Text: "Každý run se mění ve strukturovaný důkaz pro další kreativu, kampaň a obchodní rozhodnutí.",
+        operatorEyebrow: "Jak pilot funguje",
+        operatorTitle: "Nejdřív řízený content loop. Software až ve chvíli, kdy se opakovatelné části potvrdí.",
+        operatorIntro: "První piloty jsou záměrně hands-on: mapujeme e-shop, připravujeme strukturované briefy, generujeme varianty obsahu, držíme schválení pod kontrolou a každý run měníme v produktové učení.",
+        operatorCard1Title: "Zmapujeme e-shop",
+        operatorCard1Text: "Produkty, publikum, aktuální priority, skladový kontext, zakázaná témata a pravidla značky zachytíme ještě před prvním runem.",
+        operatorCard2Title: "Vybereme bezpečné formáty",
+        operatorCard2Text: "Produktový spotlight, průvodce kategorií, kampaňová nabídka, evergreen tipy nebo news-style posty volíme podle toho, co e-shop skutečně unese.",
+        operatorCard3Title: "Připravíme návrhy",
+        operatorCard3Text: "Aplikace pomáhá připravit osnovy carouselů, captiony, CTA a směr vizuálu ze strukturovaného briefu, v pilotech s ruční QA.",
+        operatorCard4Title: "Schválíme výstup",
+        operatorCard4Text: "Majitel nebo tým zkontroluje důležitá rozhodnutí před tím, než se cokoliv publikuje nebo připraví do kampaně.",
+        operatorCard5Title: "Zapíšeme learning",
+        operatorCard5Text: "Každý run vytvoří krátký evidence log, aby další várka byla ostřejší a budoucí platforma stála na reálných provozních datech.",
         whyEyebrow: "Proč na tom záleží",
         whyTitle: "Většina e-shopů nepotřebuje další nástroj. Potřebuje exekuci.",
         whyBullet1Title: "Agentury jsou drahé a pomalé.",
@@ -872,7 +922,18 @@
 
     let currentLanguage = "en";
 
-    function applyLanguage(language) {
+    function updateLanguageUrl(lang) {
+      if (!window.history || !window.URL) return;
+      const url = new URL(window.location.href);
+      if (lang === "cs") {
+        url.searchParams.set("lang", "cs");
+      } else {
+        url.searchParams.delete("lang");
+      }
+      window.history.replaceState({}, "", url);
+    }
+
+    function applyLanguage(language, updateUrl = false) {
       const lang = TRANSLATIONS[language] ? language : "en";
       currentLanguage = lang;
       const dict = TRANSLATIONS[lang];
@@ -881,8 +942,12 @@
       document.querySelector('meta[name="description"]')?.setAttribute("content", dict.metaDescription);
       document.querySelector('meta[property="og:title"]')?.setAttribute("content", dict.metaTitle);
       document.querySelector('meta[property="og:description"]')?.setAttribute("content", dict.metaDescription);
+      document.querySelector('meta[property="og:locale"]')?.setAttribute("content", dict.ogLocale);
+      document.querySelector('meta[property="og:image:alt"]')?.setAttribute("content", dict.metaImageAlt);
       document.querySelector('meta[name="twitter:title"]')?.setAttribute("content", dict.metaTitle);
       document.querySelector('meta[name="twitter:description"]')?.setAttribute("content", dict.metaDescription);
+      document.querySelector('meta[name="twitter:image:alt"]')?.setAttribute("content", dict.metaImageAlt);
+      if (updateUrl) updateLanguageUrl(lang);
 
       document.querySelectorAll("[data-i18n]").forEach((node) => {
         const key = node.getAttribute("data-i18n");
@@ -901,11 +966,6 @@
         button.classList.toggle("is-active", active);
         button.setAttribute("aria-pressed", String(active));
       });
-      try {
-        window.localStorage.setItem("masthead-language", lang);
-      } catch (error) {
-        // Language persistence is a convenience only.
-      }
     }
 
     const nav = document.getElementById("nav");
@@ -930,15 +990,10 @@
     });
 
     document.querySelectorAll("[data-lang-switch]").forEach((button) => {
-      button.addEventListener("click", () => applyLanguage(button.getAttribute("data-lang-switch")));
+      button.addEventListener("click", () => applyLanguage(button.getAttribute("data-lang-switch"), true));
     });
 
-    let initialLanguage = "en";
-    try {
-      initialLanguage = window.localStorage.getItem("masthead-language") || "en";
-    } catch (error) {
-      initialLanguage = "en";
-    }
+    const initialLanguage = new URLSearchParams(window.location.search).get("lang") === "cs" ? "cs" : "en";
     applyLanguage(initialLanguage);
 
     const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
