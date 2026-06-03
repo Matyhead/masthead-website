@@ -561,13 +561,49 @@
       .hero-lede { font-size: 17px; }
       .waitlist { flex-direction: column; }
       .waitlist .btn { width: 100%; }
-      .hero-proof { grid-template-columns: 1fr; gap: 10px; }
+      .hero-proof { display: none; }
       section { padding: 68px 0; }
-      .evidence-section { padding-top: 68px; }
-      .evidence-signals { grid-template-columns: 1fr; }
-      .evidence-wall { grid-template-columns: 1fr; }
-      .evidence-shot.primary { grid-row: auto; margin-top: 0; }
-      .proof-grid, .operator-grid, .footer-grid { grid-template-columns: 1fr; }
+      .proof-band { padding: 26px 0; }
+      .proof-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .proof-cell {
+        min-height: 116px;
+        padding: 18px;
+      }
+      .proof-cell.lead {
+        grid-column: 1 / -1;
+        min-height: 0;
+        gap: 12px;
+      }
+      .proof-cell .figure {
+        font-size: 29px;
+        margin: 14px 0 5px;
+      }
+      .evidence-section { padding-top: 58px; }
+      .evidence-copy > p {
+        margin-top: 14px;
+        font-size: 16px;
+      }
+      .evidence-signals { display: none; }
+      .evidence-note { margin-top: 16px; }
+      .evidence-wall {
+        display: flex;
+        width: calc(100% + 16px);
+        margin: 26px 0 0;
+        padding: 0 16px 8px 0;
+        gap: 12px;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+      }
+      .evidence-wall::-webkit-scrollbar { display: none; }
+      .evidence-shot {
+        flex: 0 0 min(78vw, 340px);
+        scroll-snap-align: start;
+      }
+      .evidence-shot.primary { margin-top: 0; }
+      .evidence-shot figcaption { min-height: 58px; }
+      .operator-grid, .footer-grid { grid-template-columns: 1fr; }
       .operator-card, .roadmap-card { min-height: 0; }
       .founder-card { grid-template-columns: 1fr; }
       .founder-card p { font-size: 19px; }
