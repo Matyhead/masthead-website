@@ -18,8 +18,8 @@
   <meta property="og:url" content="https://themasthead.cz/" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:locale:alternate" content="cs_CZ" />
-  <meta property="og:image" content="https://themasthead.cz/og.png?v=4" />
-  <meta property="og:image:secure_url" content="https://themasthead.cz/og.png?v=4" />
+  <meta property="og:image" content="https://themasthead.cz/og.png?v=5" />
+  <meta property="og:image:secure_url" content="https://themasthead.cz/og.png?v=5" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -28,7 +28,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Masthead - AI marketing operator for e-commerce" />
   <meta name="twitter:description" content="Managed AI marketing pilots for e-commerce: product-aware content, approval, Meta campaign prep and a learning loop for every run." />
-  <meta name="twitter:image" content="https://themasthead.cz/og.png?v=4" />
+  <meta name="twitter:image" content="https://themasthead.cz/og.png?v=5" />
   <meta name="twitter:image:alt" content="Masthead - AI marketing operator for e-commerce stores." />
 
   <link rel="canonical" href="https://themasthead.cz/" />
@@ -178,6 +178,7 @@
     .brand-name { font-weight: 800; font-size: 19px; line-height: 1; }
     .nav-links { display: flex; gap: 24px; align-items: center; color: var(--ink-2); font-size: 14px; font-weight: 700; }
     .nav-links a:hover { color: var(--ink); }
+    .nav-cta-short { display: none; }
     .lang-switch {
       display: inline-flex;
       align-items: center;
@@ -343,6 +344,82 @@
     .proof-cell .figure { color: var(--ink); font-size: 34px; font-weight: 800; line-height: 1; margin: 18px 0 6px; }
     .proof-cell .note { color: var(--ink-2); font-size: 13px; }
 
+    .evidence-section {
+      background: #080907;
+      padding-top: 86px;
+    }
+    .evidence-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr);
+      gap: 46px;
+      align-items: center;
+    }
+    .evidence-copy h2 { max-width: 560px; }
+    .evidence-copy > p {
+      max-width: 520px;
+      margin-top: 18px;
+      font-size: 18px;
+    }
+    .evidence-signals {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 30px 0 16px;
+    }
+    .evidence-signals div {
+      border-top: 1px solid var(--line-strong);
+      padding-top: 12px;
+    }
+    .evidence-signals strong {
+      display: block;
+      color: var(--ink);
+      font-size: 24px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .evidence-signals span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .evidence-note {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .evidence-wall {
+      display: grid;
+      grid-template-columns: minmax(250px, 1.02fr) minmax(210px, 0.8fr);
+      gap: 14px;
+      align-items: start;
+    }
+    .evidence-shot {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #0b0f0c;
+      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.34);
+    }
+    .evidence-shot.primary {
+      grid-row: span 2;
+      margin-top: 34px;
+    }
+    .evidence-shot img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .evidence-shot figcaption {
+      min-height: 52px;
+      border-top: 1px solid rgba(247, 244, 236, 0.1);
+      padding: 12px 13px;
+      color: var(--ink-2);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
     .operator-grid {
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -462,6 +539,8 @@
       .section-head, .split, .final-grid { grid-template-columns: 1fr; display: grid; gap: 20px; align-items: start; }
       .proof-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .proof-cell.lead { grid-column: 1 / -1; }
+      .evidence-layout { grid-template-columns: 1fr; }
+      .evidence-wall { width: min(760px, 100%); margin: 10px auto 0; }
       .operator-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .roadmap { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -486,11 +565,48 @@
       .waitlist .btn { width: 100%; }
       .hero-proof { grid-template-columns: 1fr; gap: 10px; }
       section { padding: 68px 0; }
+      .evidence-section { padding-top: 68px; }
+      .evidence-signals { grid-template-columns: 1fr; }
+      .evidence-wall { grid-template-columns: 1fr; }
+      .evidence-shot.primary { grid-row: auto; margin-top: 0; }
       .proof-grid, .operator-grid, .footer-grid { grid-template-columns: 1fr; }
       .operator-card, .roadmap-card { min-height: 0; }
       .founder-card { grid-template-columns: 1fr; }
       .founder-card p { font-size: 19px; }
       .footer-bottom { flex-direction: column; }
+    }
+
+    @media (max-width: 480px) {
+      .brand { gap: 0; }
+      .brand-name { display: none; }
+      .nav-inner {
+        position: relative;
+        height: 72px;
+        width: calc(100vw - 32px);
+      }
+      .nav-links {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 4px;
+      }
+      .lang-switch { padding: 2px; }
+      .lang-switch button {
+        min-width: 29px;
+        min-height: 26px;
+        font-size: 11px;
+      }
+      .nav-cta {
+        min-height: 26px;
+        min-width: 52px;
+        padding: 0 10px;
+        font-size: 11px;
+      }
+      .nav-cta-full { display: none; }
+      .nav-cta-short { display: inline; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -521,7 +637,10 @@
           <button type="button" class="is-active" data-lang-switch="en" aria-pressed="true">EN</button>
           <button type="button" data-lang-switch="cs" aria-pressed="false">CZ</button>
         </div>
-        <a href="#join" class="btn btn-secondary nav-cta" data-i18n="navCta">Join beta</a>
+        <a href="#join" class="btn btn-secondary nav-cta">
+          <span class="nav-cta-full" data-i18n="navCta">Join beta</span>
+          <span class="nav-cta-short" data-i18n="navCtaShort">Join</span>
+        </a>
       </nav>
     </div>
   </header>
@@ -583,6 +702,37 @@
             <div class="figure">€0</div>
             <div class="note" data-i18n="proofPaidNote">organic test account</div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="evidence-section">
+      <div class="wrap evidence-layout">
+        <div class="evidence-copy">
+          <span class="eyebrow reveal" data-i18n="evidenceEyebrow">Instagram evidence</span>
+          <h2 class="reveal" data-i18n="evidenceTitle">Actual analytics screenshots from the first internal test.</h2>
+          <p class="reveal" data-i18n="evidenceIntro">Before selling Masthead, the loop ran on an internal iOpraveno Instagram account and generated measurable organic attention in one week.</p>
+          <div class="evidence-signals reveal" aria-label="Instagram proof signals">
+            <div><strong>836,091</strong><span data-i18n="evidenceSignalViews">views</span></div>
+            <div><strong>5,269</strong><span data-i18n="evidenceSignalInteractions">interactions</span></div>
+            <div><strong>0.0%</strong><span data-i18n="evidenceSignalAds">from ads</span></div>
+          </div>
+          <p class="evidence-note reveal" data-i18n="evidenceNote">Screenshots are from Instagram Insights for 24-31 May. Internal test account, not a client guarantee.</p>
+        </div>
+
+        <div class="evidence-wall" aria-label="Instagram analytics screenshots from the internal test">
+          <figure class="evidence-shot primary reveal">
+            <img src="/assets/proof-views.png" alt="Instagram Insights screenshot showing 836,091 views and 0.0 percent from ads." loading="lazy" decoding="async" />
+            <figcaption data-i18n="evidenceShotViews">Views reached 836,091 with 0.0% from ads.</figcaption>
+          </figure>
+          <figure class="evidence-shot reveal">
+            <img src="/assets/proof-interactions.png" alt="Instagram Insights screenshot showing post interactions, likes, comments, saves and reposts." loading="lazy" decoding="async" />
+            <figcaption data-i18n="evidenceShotInteractions">5,269 interactions across likes, comments, saves and reposts.</figcaption>
+          </figure>
+          <figure class="evidence-shot reveal">
+            <img src="/assets/proof-content.png" alt="Instagram Insights screenshot showing best performing posts and profile activity." loading="lazy" decoding="async" />
+            <figcaption data-i18n="evidenceShotContent">Top posts and profile activity kept the signal auditable.</figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -773,6 +923,7 @@
         navOperator: "Operator",
         navRoadmap: "Roadmap",
         navCta: "Join beta",
+        navCtaShort: "Join",
         heroStatus: "Private beta for Shopify and Shoptet stores",
         heroTitle: "<span class=\"hero-title-line\">AI marketing</span><span class=\"hero-title-line\">operator for</span><span class=\"hero-title-accent\">e-commerce.</span>",
         heroLede: "Masthead helps e-commerce teams turn product context into approved organic posts, campaign-ready creative and a learning loop for the next run.",
@@ -795,6 +946,16 @@
         proofInteractionsNote: "likes, saves, shares",
         proofPaidLabel: "Paid media",
         proofPaidNote: "organic test account",
+        evidenceEyebrow: "Instagram evidence",
+        evidenceTitle: "Actual analytics screenshots from the first internal test.",
+        evidenceIntro: "Before selling Masthead, the loop ran on an internal iOpraveno Instagram account and generated measurable organic attention in one week.",
+        evidenceSignalViews: "views",
+        evidenceSignalInteractions: "interactions",
+        evidenceSignalAds: "from ads",
+        evidenceNote: "Screenshots are from Instagram Insights for 24-31 May. Internal test account, not a client guarantee.",
+        evidenceShotViews: "Views reached 836,091 with 0.0% from ads.",
+        evidenceShotInteractions: "5,269 interactions across likes, comments, saves and reposts.",
+        evidenceShotContent: "Top posts and profile activity kept the signal auditable.",
         operatorEyebrow: "How pilots work",
         operatorTitle: "A managed content loop first. A software platform as the repeatable pieces harden.",
         operatorIntro: "Early pilots are deliberately hands-on: we map the store, prepare structured briefs, generate content options, keep approval controlled and turn each run into product learning.",
@@ -860,6 +1021,7 @@
         navOperator: "Operator",
         navRoadmap: "Roadmapa",
         navCta: "Do bety",
+        navCtaShort: "Beta",
         heroStatus: "Privátní beta pro Shopify a Shoptet e-shopy",
         heroTitle: "<span class=\"hero-title-line\">AI marketing</span><span class=\"hero-title-line\">operator pro</span><span class=\"hero-title-accent\">e-commerce.</span>",
         heroLede: "Masthead pomáhá e-commerce týmům měnit produktový kontext na schválené organické posty, kreativu připravenou pro kampaně a learning loop pro další run.",
@@ -882,6 +1044,16 @@
         proofInteractionsNote: "lajky, uložení, sdílení",
         proofPaidLabel: "Placená média",
         proofPaidNote: "interní testovací účet",
+        evidenceEyebrow: "Důkaz z Instagramu",
+        evidenceTitle: "Reálné screenshoty analytiky z prvního interního testu.",
+        evidenceIntro: "Ještě před prodejem Mastheadu běžela smyčka na interním instagramovém účtu iOpraveno a během jednoho týdne získala měřitelnou organickou pozornost.",
+        evidenceSignalViews: "zobrazení",
+        evidenceSignalInteractions: "interakcí",
+        evidenceSignalAds: "z reklam",
+        evidenceNote: "Screenshoty pochází z Instagram Insights za 24.-31. 5. Interní testovací účet, ne garance výsledků klienta.",
+        evidenceShotViews: "Zobrazení dosáhla 836 091 s 0,0 % z reklam.",
+        evidenceShotInteractions: "5 269 interakcí napříč lajky, komentáři, uloženími a reposty.",
+        evidenceShotContent: "Top posty a aktivita profilu drží výsledek auditovatelný.",
         operatorEyebrow: "Jak pilot funguje",
         operatorTitle: "Nejdřív řízený content loop. Software až ve chvíli, kdy se opakovatelné části potvrdí.",
         operatorIntro: "První piloty jsou záměrně hands-on: mapujeme e-shop, připravujeme strukturované briefy, generujeme varianty obsahu, držíme schválení pod kontrolou a každý run měníme v produktové učení.",
