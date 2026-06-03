@@ -1,6 +1,6 @@
-// Vercel Serverless Function — POST /api/waitlist
-// Inserts a waitlist signup into Supabase. Keys stay server-side (env vars).
-// Runs on Node.js 18+ (global fetch available — no dependencies needed).
+// Vercel Serverless Function - POST /api/waitlist
+// Inserts a waitlist signup into Supabase. Keys stay server-side.
+// Runs on Node.js 18+ with global fetch available.
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -10,10 +10,13 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // Body may arrive parsed (Vercel) or as a raw string — handle both.
   let body = req.body;
   if (typeof body === 'string') {
-    try { body = JSON.parse(body); } catch { body = {}; }
+    try {
+      body = JSON.parse(body);
+    } catch {
+      body = {};
+    }
   }
   body = body || {};
 
@@ -44,7 +47,6 @@ export default async function handler(req, res) {
       body: JSON.stringify({ email, source })
     });
 
-    // Duplicate email (unique constraint) → treat as success: they're already on the list.
     if (resp.status === 409) {
       return res.status(200).json({ ok: true, message: "You're already on the list." });
     }

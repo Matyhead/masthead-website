@@ -12,7 +12,7 @@
       ]
     },
     {
-      "source": "/(favicon.svg|og.png)",
+      "source": "/(favicon.svg|og.png|assets/(.*))",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=86400" }
       ]

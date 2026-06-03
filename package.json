@@ -2,7 +2,7 @@
   "name": "masthead-landing",
   "version": "1.0.0",
   "private": true,
-  "description": "Masthead — landing page + waitlist (static site with a Vercel serverless route).",
+  "description": "Masthead landing page and waitlist for themasthead.cz.",
   "scripts": {
     "dev": "vercel dev",
     "start": "vercel dev"
