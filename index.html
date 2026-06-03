@@ -131,6 +131,30 @@
     .brand-name { font-weight: 800; font-size: 19px; line-height: 1; }
     .nav-links { display: flex; gap: 24px; align-items: center; color: var(--ink-2); font-size: 14px; font-weight: 700; }
     .nav-links a:hover { color: var(--ink); }
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      padding: 3px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: rgba(247, 244, 236, 0.05);
+    }
+    .lang-switch button {
+      min-width: 34px;
+      min-height: 32px;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--muted);
+      font: 800 12px var(--sans);
+      cursor: pointer;
+    }
+    .lang-switch button.is-active {
+      background: var(--ink);
+      color: var(--bg);
+    }
+    .lang-switch button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
     .hero {
       min-height: calc(100svh - 126px);
@@ -384,6 +408,7 @@
       .wrap { width: min(100% - 32px, var(--max)); }
       .nav-inner { height: 64px; }
       .nav-links { gap: 10px; }
+      .lang-switch button { min-width: 31px; }
       .nav-cta { padding: 10px 12px; }
       .hero { min-height: auto; padding: 74px 0 64px; }
       .hero-bg { opacity: 0.36; object-position: 58% center; }
@@ -423,10 +448,14 @@
         </span>
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
-        <a href="#proof">Proof</a>
-        <a href="#operator">Operator</a>
-        <a href="#roadmap">Roadmap</a>
-        <a href="#join" class="btn btn-secondary nav-cta">Join beta</a>
+        <a href="#proof" data-i18n="navProof">Proof</a>
+        <a href="#operator" data-i18n="navOperator">Operator</a>
+        <a href="#roadmap" data-i18n="navRoadmap">Roadmap</a>
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" class="is-active" data-lang-switch="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang-switch="cs" aria-pressed="false">CZ</button>
+        </div>
+        <a href="#join" class="btn btn-secondary nav-cta" data-i18n="navCta">Join beta</a>
       </nav>
     </div>
   </header>
@@ -436,26 +465,26 @@
       <img class="hero-bg" src="/assets/operator-console.png?v=2" alt="" aria-hidden="true" />
       <div class="wrap">
         <div class="hero-copy">
-          <div class="hero-status reveal"><span></span> Private beta for Shopify and Shoptet stores</div>
-          <h1 class="reveal">AI marketing operator for <span>e-commerce.</span></h1>
-          <p class="hero-lede reveal">Masthead connects to a store, understands what should sell now, generates approved posts and ads, publishes through Meta, then learns from performance.</p>
+          <div class="hero-status reveal"><span></span> <span data-i18n="heroStatus">Private beta for Shopify and Shoptet stores</span></div>
+          <h1 class="reveal" data-i18n-html="heroTitle">AI marketing operator for <span>e-commerce.</span></h1>
+          <p class="hero-lede reveal" data-i18n="heroLede">Masthead connects to a store, understands what should sell now, generates approved posts and ads, publishes through Meta, then learns from performance.</p>
 
           <form class="waitlist reveal" id="waitlist-form" novalidate>
-            <label for="email" class="sr-only">Email address</label>
-            <input type="email" id="email" name="email" placeholder="you@yourstore.com" autocomplete="email" required />
-            <button type="submit" class="btn" id="submit-btn">Request access</button>
+            <label for="email" class="sr-only" data-i18n="emailLabel">Email address</label>
+            <input type="email" id="email" name="email" placeholder="you@yourstore.com" data-i18n-placeholder="emailPlaceholder" autocomplete="email" required />
+            <button type="submit" class="btn" id="submit-btn" data-i18n="heroButton">Request access</button>
           </form>
           <div class="form-success reveal" id="form-success" role="status" aria-live="polite">
-            <h3>You're on the list.</h3>
-            <p>We'll reach out when the next pilot slots open.</p>
+            <h3 data-i18n="successTitle">You're on the list.</h3>
+            <p data-i18n="successText">We'll reach out when the next pilot slots open.</p>
           </div>
-          <p class="microline reveal" id="microline">Managed pilots first. No spam, no public launch noise.</p>
+          <p class="microline reveal" id="microline" data-i18n="heroMicroline">Managed pilots first. No spam, no public launch noise.</p>
           <p class="form-msg" id="form-msg" role="alert" aria-live="assertive"></p>
 
           <div class="hero-proof reveal" aria-label="Early traction">
-            <div><strong>500K+</strong><span>views in first 4 days</span></div>
-            <div><strong>836K</strong><span>week-one organic views</span></div>
-            <div><strong>€0</strong><span>ad spend</span></div>
+            <div><strong>500K+</strong><span data-i18n="heroProofViews">views in first 4 days</span></div>
+            <div><strong>836K</strong><span data-i18n="heroProofWeek">week-one organic views</span></div>
+            <div><strong>€0</strong><span data-i18n="heroProofSpend">ad spend</span></div>
           </div>
         </div>
       </div>
@@ -465,28 +494,28 @@
       <div class="wrap">
         <div class="proof-grid">
           <div class="proof-cell lead reveal">
-            <span class="eyebrow">Live proof</span>
-            <p>The engine started on a real Instagram account before becoming a B2B product. The point is not vanity metrics. The point is that the loop can already generate attention without a marketing team.</p>
+            <span class="eyebrow" data-i18n="proofEyebrow">Live proof</span>
+            <p data-i18n="proofLead">The engine started on a real Instagram account before becoming a B2B product. The point is not vanity metrics. The point is that the loop can already generate attention without a marketing team.</p>
           </div>
           <div class="proof-cell reveal">
-            <div class="label">Organic views</div>
+            <div class="label" data-i18n="proofOrganicLabel">Organic views</div>
             <div class="figure">836K</div>
-            <div class="note">first week</div>
+            <div class="note" data-i18n="proofOrganicNote">first week</div>
           </div>
           <div class="proof-cell reveal">
-            <div class="label">Accounts reached</div>
+            <div class="label" data-i18n="proofReachLabel">Accounts reached</div>
             <div class="figure">72,666</div>
-            <div class="note">+497% week over week</div>
+            <div class="note" data-i18n="proofReachNote">+497% week over week</div>
           </div>
           <div class="proof-cell reveal">
-            <div class="label">Interactions</div>
+            <div class="label" data-i18n="proofInteractionsLabel">Interactions</div>
             <div class="figure">5,269</div>
-            <div class="note">likes, saves, shares</div>
+            <div class="note" data-i18n="proofInteractionsNote">likes, saves, shares</div>
           </div>
           <div class="proof-cell reveal">
-            <div class="label">Paid media</div>
+            <div class="label" data-i18n="proofPaidLabel">Paid media</div>
             <div class="figure">€0</div>
-            <div class="note">organic test account</div>
+            <div class="note" data-i18n="proofPaidNote">organic test account</div>
           </div>
         </div>
       </div>
@@ -496,45 +525,45 @@
       <div class="wrap">
         <div class="section-head">
           <div>
-            <span class="eyebrow reveal">What it does</span>
-            <h2 class="reveal">The work of a lean marketing team, running as software.</h2>
+            <span class="eyebrow reveal" data-i18n="operatorEyebrow">What it does</span>
+            <h2 class="reveal" data-i18n="operatorTitle">The work of a lean marketing team, running as software.</h2>
           </div>
-          <p class="reveal">The first pilots are hands-on by design: every store gets a tailored setup, approval stays controlled, and the system learns from real operating context.</p>
+          <p class="reveal" data-i18n="operatorIntro">The first pilots are hands-on by design: every store gets a tailored setup, approval stays controlled, and the system learns from real operating context.</p>
         </div>
         <div class="operator-grid">
           <article class="operator-card reveal">
             <div>
               <span class="num">01</span>
-              <h3>Reads the store</h3>
-              <p>Catalog, stock, product priority, margins, blocked topics and brand voice live under one client profile.</p>
+              <h3 data-i18n="operatorCard1Title">Reads the store</h3>
+              <p data-i18n="operatorCard1Text">Catalog, stock, product priority, margins, blocked topics and brand voice live under one client profile.</p>
             </div>
           </article>
           <article class="operator-card reveal">
             <div>
               <span class="num">02</span>
-              <h3>Chooses the angle</h3>
-              <p>Product spotlight, category guide, campaign offer, evergreen tips or news reaction. Not every business is a news feed.</p>
+              <h3 data-i18n="operatorCard2Title">Chooses the angle</h3>
+              <p data-i18n="operatorCard2Text">Product spotlight, category guide, campaign offer, evergreen tips or news reaction. Not every business is a news feed.</p>
             </div>
           </article>
           <article class="operator-card reveal">
             <div>
               <span class="num">03</span>
-              <h3>Creates the post</h3>
-              <p>Carousel structure, caption, CTA, image search and visual checks are generated from a structured brief.</p>
+              <h3 data-i18n="operatorCard3Title">Creates the post</h3>
+              <p data-i18n="operatorCard3Text">Carousel structure, caption, CTA, image search and visual checks are generated from a structured brief.</p>
             </div>
           </article>
           <article class="operator-card reveal">
             <div>
               <span class="num">04</span>
-              <h3>Routes approval</h3>
-              <p>Human approval stays in the loop before anything goes live. Pilots stay safe by default.</p>
+              <h3 data-i18n="operatorCard4Title">Routes approval</h3>
+              <p data-i18n="operatorCard4Text">Human approval stays in the loop before anything goes live. Pilots stay safe by default.</p>
             </div>
           </article>
           <article class="operator-card reveal">
             <div>
               <span class="num">05</span>
-              <h3>Learns what works</h3>
-              <p>Every run becomes structured evidence for the next creative, campaign and store decision.</p>
+              <h3 data-i18n="operatorCard5Title">Learns what works</h3>
+              <p data-i18n="operatorCard5Text">Every run becomes structured evidence for the next creative, campaign and store decision.</p>
             </div>
           </article>
         </div>
@@ -544,21 +573,21 @@
     <section>
       <div class="wrap split">
         <div>
-          <span class="eyebrow reveal">Why this matters</span>
-          <h2 class="reveal">Most e-commerce stores do not need more tools. They need execution.</h2>
+          <span class="eyebrow reveal" data-i18n="whyEyebrow">Why this matters</span>
+          <h2 class="reveal" data-i18n="whyTitle">Most e-commerce stores do not need more tools. They need execution.</h2>
         </div>
         <div class="bullets">
           <div class="bullet reveal">
-            <strong>Agencies are expensive and slow.</strong>
-            <p>Routine marketing work should not cost thousands a month before a store even knows what angle will work.</p>
+            <strong data-i18n="whyBullet1Title">Agencies are expensive and slow.</strong>
+            <p data-i18n="whyBullet1Text">Routine marketing work should not cost thousands a month before a store even knows what angle will work.</p>
           </div>
           <div class="bullet reveal">
-            <strong>AI content without inventory context is shallow.</strong>
-            <p>The product direction is to connect stock, margins and campaign opportunities so content follows business reality.</p>
+            <strong data-i18n="whyBullet2Title">AI content without inventory context is shallow.</strong>
+            <p data-i18n="whyBullet2Text">The product direction is to connect stock, margins and campaign opportunities so content follows business reality.</p>
           </div>
           <div class="bullet reveal">
-            <strong>Pilots should create momentum, not extra work.</strong>
-            <p>Masthead is designed to give owners a working content and campaign loop without adding another dashboard they have to manage every day.</p>
+            <strong data-i18n="whyBullet3Title">Pilots should create momentum, not extra work.</strong>
+            <p data-i18n="whyBullet3Text">Masthead is designed to give owners a working content and campaign loop without adding another dashboard they have to manage every day.</p>
           </div>
         </div>
       </div>
@@ -568,26 +597,26 @@
       <div class="wrap">
         <div class="section-head">
           <div>
-            <span class="eyebrow reveal">Roadmap</span>
-            <h2 class="reveal">From content engine to marketing operating system.</h2>
+            <span class="eyebrow reveal" data-i18n="roadmapEyebrow">Roadmap</span>
+            <h2 class="reveal" data-i18n="roadmapTitle">From content engine to marketing operating system.</h2>
           </div>
-          <p class="reveal">The live prototype already handles clients, product-aware briefs, approval workflow and Meta onboarding foundations.</p>
+          <p class="reveal" data-i18n="roadmapIntro">The live prototype already handles clients, product-aware briefs, approval workflow and Meta onboarding foundations.</p>
         </div>
         <div class="roadmap">
           <article class="roadmap-card reveal">
-            <div class="phase">Phase 1</div>
-            <h3>Inventory-aware content</h3>
-            <p>Shopify and Shoptet catalogs, promotable product selection, stock-safe posts, catalog image provenance and client review.</p>
+            <div class="phase" data-i18n="phase1">Phase 1</div>
+            <h3 data-i18n="roadmapCard1Title">Inventory-aware content</h3>
+            <p data-i18n="roadmapCard1Text">Shopify and Shoptet catalogs, promotable product selection, stock-safe posts, catalog image provenance and client review.</p>
           </article>
           <article class="roadmap-card reveal">
-            <div class="phase">Phase 2</div>
-            <h3>Meta campaign loop</h3>
-            <p>Approved creatives become ads, budgets stay capped, results come back into the reporting model, and winners inform the next run.</p>
+            <div class="phase" data-i18n="phase2">Phase 2</div>
+            <h3 data-i18n="roadmapCard2Title">Meta campaign loop</h3>
+            <p data-i18n="roadmapCard2Text">Approved creatives become ads, budgets stay capped, results come back into the reporting model, and winners inform the next run.</p>
           </article>
           <article class="roadmap-card reveal">
-            <div class="phase">Phase 3</div>
-            <h3>Cross-store learning</h3>
-            <p>Structured creative metadata makes Masthead smarter across verticals without exposing tenant data.</p>
+            <div class="phase" data-i18n="phase3">Phase 3</div>
+            <h3 data-i18n="roadmapCard3Title">Cross-store learning</h3>
+            <p data-i18n="roadmapCard3Text">Structured creative metadata makes Masthead smarter across verticals without exposing tenant data.</p>
           </article>
         </div>
       </div>
@@ -597,9 +626,9 @@
       <div class="wrap founder-card">
         <div class="founder-avatar reveal" aria-hidden="true">MK</div>
         <div>
-          <span class="eyebrow reveal">Founder</span>
-          <p class="reveal">Built by Matyáš Kouřil after running an e-shop, spending heavily on Meta Ads and seeing how much of everyday marketing is repeatable operational work.</p>
-          <div class="founder-name reveal">Matyáš Kouřil - Founder, Masthead</div>
+          <span class="eyebrow reveal" data-i18n="founderEyebrow">Founder</span>
+          <p class="reveal" data-i18n="founderText">Built by Matyáš Kouřil after running an e-shop, spending heavily on Meta Ads and seeing how much of everyday marketing is repeatable operational work.</p>
+          <div class="founder-name reveal" data-i18n="founderName">Matyáš Kouřil - Founder, Masthead</div>
         </div>
       </div>
     </section>
@@ -607,21 +636,21 @@
     <section class="final">
       <div class="wrap final-grid">
         <div>
-          <span class="eyebrow reveal">Early access</span>
-          <h2 class="reveal">Bring Masthead into your store before the public launch.</h2>
-          <p class="reveal">We are prioritising e-commerce pilots with clear products, enough catalog depth and an owner willing to approve fast.</p>
+          <span class="eyebrow reveal" data-i18n="finalEyebrow">Early access</span>
+          <h2 class="reveal" data-i18n="finalTitle">Bring Masthead into your store before the public launch.</h2>
+          <p class="reveal" data-i18n="finalText">We are prioritising e-commerce pilots with clear products, enough catalog depth and an owner willing to approve fast.</p>
         </div>
         <div>
           <form class="waitlist reveal" id="waitlist-form-2" novalidate>
-            <label for="email2" class="sr-only">Email address</label>
-            <input type="email" id="email2" name="email" placeholder="you@yourstore.com" autocomplete="email" required />
-            <button type="submit" class="btn" id="submit-btn-2">Join beta</button>
+            <label for="email2" class="sr-only" data-i18n="emailLabel">Email address</label>
+            <input type="email" id="email2" name="email" placeholder="you@yourstore.com" data-i18n-placeholder="emailPlaceholder" autocomplete="email" required />
+            <button type="submit" class="btn" id="submit-btn-2" data-i18n="finalButton">Join beta</button>
           </form>
           <div class="form-success reveal" id="form-success-2" role="status" aria-live="polite">
-            <h3>You're on the list.</h3>
-            <p>We'll reach out when the next pilot slots open.</p>
+            <h3 data-i18n="successTitle">You're on the list.</h3>
+            <p data-i18n="successText">We'll reach out when the next pilot slots open.</p>
           </div>
-          <p class="microline reveal">Early access for Shopify and Shoptet stores.</p>
+          <p class="microline reveal" data-i18n="finalMicroline">Early access for Shopify and Shoptet stores.</p>
           <p class="form-msg" id="form-msg-2" role="alert" aria-live="assertive"></p>
         </div>
       </div>
@@ -640,34 +669,245 @@
             </svg>
             <span>Masthead</span>
           </div>
-          <p>AI marketing operator for e-commerce stores. Built in the Czech Republic, designed for global operators.</p>
+          <p data-i18n="footerDescription">AI marketing operator for e-commerce stores. Built in the Czech Republic, designed for global operators.</p>
         </div>
         <div class="footer-col">
-          <span class="footer-title">Product</span>
-          <a href="#operator">Operator loop</a>
-          <a href="#proof">Proof</a>
-          <a href="#roadmap">Roadmap</a>
+          <span class="footer-title" data-i18n="footerProduct">Product</span>
+          <a href="#operator" data-i18n="footerOperator">Operator loop</a>
+          <a href="#proof" data-i18n="navProof">Proof</a>
+          <a href="#roadmap" data-i18n="navRoadmap">Roadmap</a>
         </div>
         <div class="footer-col">
-          <span class="footer-title">Contact</span>
+          <span class="footer-title" data-i18n="footerContact">Contact</span>
           <a href="mailto:hello@themasthead.cz">hello@themasthead.cz</a>
           <a href="https://themasthead.cz">themasthead.cz</a>
         </div>
         <div class="footer-col">
-          <span class="footer-title">Status</span>
-          <span>Private beta</span>
-          <span>Managed pilots first</span>
-          <span>Human approval by default</span>
+          <span class="footer-title" data-i18n="footerStatus">Status</span>
+          <span data-i18n="footerStatus1">Private beta</span>
+          <span data-i18n="footerStatus2">Managed pilots first</span>
+          <span data-i18n="footerStatus3">Human approval by default</span>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2026 Masthead. All rights reserved.</span>
-        <span>Organic proof is from an internal test account and is not a client guarantee.</span>
+        <span data-i18n="footerRights">© 2026 Masthead. All rights reserved.</span>
+        <span data-i18n="footerDisclaimer">Organic proof is from an internal test account and is not a client guarantee.</span>
       </div>
     </div>
   </footer>
 
   <script>
+    const TRANSLATIONS = {
+      en: {
+        metaTitle: "Masthead - AI marketing operator for e-commerce",
+        metaDescription: "Masthead connects to your store, understands inventory, creates organic posts and ads, routes them through approval, publishes through Meta, and learns from performance.",
+        navProof: "Proof",
+        navOperator: "Operator",
+        navRoadmap: "Roadmap",
+        navCta: "Join beta",
+        heroStatus: "Private beta for Shopify and Shoptet stores",
+        heroTitle: "AI marketing operator for <span>e-commerce.</span>",
+        heroLede: "Masthead connects to a store, understands what should sell now, generates approved posts and ads, publishes through Meta, then learns from performance.",
+        emailLabel: "Email address",
+        emailPlaceholder: "you@yourstore.com",
+        heroButton: "Request access",
+        successTitle: "You're on the list.",
+        successText: "We'll reach out when the next pilot slots open.",
+        heroMicroline: "Managed pilots first. No spam, no public launch noise.",
+        heroProofViews: "views in first 4 days",
+        heroProofWeek: "week-one organic views",
+        heroProofSpend: "ad spend",
+        proofEyebrow: "Live proof",
+        proofLead: "The engine started on a real Instagram account before becoming a B2B product. The point is not vanity metrics. The point is that the loop can already generate attention without a marketing team.",
+        proofOrganicLabel: "Organic views",
+        proofOrganicNote: "first week",
+        proofReachLabel: "Accounts reached",
+        proofReachNote: "+497% week over week",
+        proofInteractionsLabel: "Interactions",
+        proofInteractionsNote: "likes, saves, shares",
+        proofPaidLabel: "Paid media",
+        proofPaidNote: "organic test account",
+        operatorEyebrow: "What it does",
+        operatorTitle: "The work of a lean marketing team, running as software.",
+        operatorIntro: "The first pilots are hands-on by design: every store gets a tailored setup, approval stays controlled, and the system learns from real operating context.",
+        operatorCard1Title: "Reads the store",
+        operatorCard1Text: "Catalog, stock, product priority, margins, blocked topics and brand voice live under one client profile.",
+        operatorCard2Title: "Chooses the angle",
+        operatorCard2Text: "Product spotlight, category guide, campaign offer, evergreen tips or news reaction. Not every business is a news feed.",
+        operatorCard3Title: "Creates the post",
+        operatorCard3Text: "Carousel structure, caption, CTA, image search and visual checks are generated from a structured brief.",
+        operatorCard4Title: "Routes approval",
+        operatorCard4Text: "Human approval stays in the loop before anything goes live. Pilots stay safe by default.",
+        operatorCard5Title: "Learns what works",
+        operatorCard5Text: "Every run becomes structured evidence for the next creative, campaign and store decision.",
+        whyEyebrow: "Why this matters",
+        whyTitle: "Most e-commerce stores do not need more tools. They need execution.",
+        whyBullet1Title: "Agencies are expensive and slow.",
+        whyBullet1Text: "Routine marketing work should not cost thousands a month before a store even knows what angle will work.",
+        whyBullet2Title: "AI content without inventory context is shallow.",
+        whyBullet2Text: "The product direction is to connect stock, margins and campaign opportunities so content follows business reality.",
+        whyBullet3Title: "Pilots should create momentum, not extra work.",
+        whyBullet3Text: "Masthead is designed to give owners a working content and campaign loop without adding another dashboard they have to manage every day.",
+        roadmapEyebrow: "Roadmap",
+        roadmapTitle: "From content engine to marketing operating system.",
+        roadmapIntro: "The live prototype already handles clients, product-aware briefs, approval workflow and Meta onboarding foundations.",
+        phase1: "Phase 1",
+        phase2: "Phase 2",
+        phase3: "Phase 3",
+        roadmapCard1Title: "Inventory-aware content",
+        roadmapCard1Text: "Shopify and Shoptet catalogs, promotable product selection, stock-safe posts, catalog image provenance and client review.",
+        roadmapCard2Title: "Meta campaign loop",
+        roadmapCard2Text: "Approved creatives become ads, budgets stay capped, results come back into the reporting model, and winners inform the next run.",
+        roadmapCard3Title: "Cross-store learning",
+        roadmapCard3Text: "Structured creative metadata makes Masthead smarter across verticals without exposing tenant data.",
+        founderEyebrow: "Founder",
+        founderText: "Built by Matyáš Kouřil after running an e-shop, spending heavily on Meta Ads and seeing how much of everyday marketing is repeatable operational work.",
+        founderName: "Matyáš Kouřil - Founder, Masthead",
+        finalEyebrow: "Early access",
+        finalTitle: "Bring Masthead into your store before the public launch.",
+        finalText: "We are prioritising e-commerce pilots with clear products, enough catalog depth and an owner willing to approve fast.",
+        finalButton: "Join beta",
+        finalMicroline: "Early access for Shopify and Shoptet stores.",
+        footerDescription: "AI marketing operator for e-commerce stores. Built in the Czech Republic, designed for global operators.",
+        footerProduct: "Product",
+        footerOperator: "Operator loop",
+        footerContact: "Contact",
+        footerStatus: "Status",
+        footerStatus1: "Private beta",
+        footerStatus2: "Managed pilots first",
+        footerStatus3: "Human approval by default",
+        footerRights: "© 2026 Masthead. All rights reserved.",
+        footerDisclaimer: "Organic proof is from an internal test account and is not a client guarantee.",
+        formInvalid: "Please enter a valid email address.",
+        formJoining: "Joining...",
+        formGenericError: "Something went wrong. Please try again.",
+        formNetworkError: "Network error. Please check your connection and try again."
+      },
+      cs: {
+        metaTitle: "Masthead - AI marketing operator pro e-commerce",
+        metaDescription: "Masthead se napojí na e-shop, rozumí produktům a skladu, tvoří organické posty i reklamy, posílá je ke schválení, publikuje přes Meta a učí se z výsledků.",
+        navProof: "Výsledky",
+        navOperator: "Operator",
+        navRoadmap: "Roadmapa",
+        navCta: "Do bety",
+        heroStatus: "Privátní beta pro Shopify a Shoptet e-shopy",
+        heroTitle: "AI marketing operator pro <span>e-commerce.</span>",
+        heroLede: "Masthead se napojí na e-shop, pochopí co má zrovna prodávat, vytvoří schválené posty a reklamy, publikuje přes Meta a učí se z výkonu.",
+        emailLabel: "E-mailová adresa",
+        emailPlaceholder: "vy@vaseshop.cz",
+        heroButton: "Požádat o přístup",
+        successTitle: "Jste na seznamu.",
+        successText: "Ozveme se, jakmile otevřeme další pilotní sloty.",
+        heroMicroline: "Nejdřív řízené piloty. Žádný spam, žádný launch hluk.",
+        heroProofViews: "zhlédnutí za první 4 dny",
+        heroProofWeek: "organických zhlédnutí za týden",
+        heroProofSpend: "útrata za reklamu",
+        proofEyebrow: "Živý důkaz",
+        proofLead: "Engine začal na reálném instagramovém účtu ještě před tím, než se z něj stal B2B produkt. Nejde o vanity metriku. Jde o důkaz, že smyčka umí získat pozornost bez marketingového týmu.",
+        proofOrganicLabel: "Organická zhlédnutí",
+        proofOrganicNote: "první týden",
+        proofReachLabel: "Oslovené účty",
+        proofReachNote: "+497 % týden po týdnu",
+        proofInteractionsLabel: "Interakce",
+        proofInteractionsNote: "lajky, uložení, sdílení",
+        proofPaidLabel: "Placená média",
+        proofPaidNote: "interní testovací účet",
+        operatorEyebrow: "Co dělá",
+        operatorTitle: "Práce štíhlého marketingového týmu, běžící jako software.",
+        operatorIntro: "První piloty jsou záměrně hands-on: každý e-shop dostane vlastní nastavení, schvalování zůstává pod kontrolou a systém se učí z reálného provozu.",
+        operatorCard1Title: "Čte e-shop",
+        operatorCard1Text: "Katalog, sklad, priorita produktů, marže, zakázaná témata a tone of voice žijí v jednom klientském profilu.",
+        operatorCard2Title: "Volí úhel",
+        operatorCard2Text: "Produktový spotlight, průvodce kategorií, kampaňová nabídka, evergreen tipy nebo reakce na novinky. Ne každá firma je news feed.",
+        operatorCard3Title: "Tvoří post",
+        operatorCard3Text: "Struktura carouselu, caption, CTA, hledání obrázků a vizuální kontroly vznikají ze strukturovaného briefu.",
+        operatorCard4Title: "Řeší schválení",
+        operatorCard4Text: "Člověk zůstává ve smyčce před tím, než cokoliv vyjde ven. Piloty jsou bezpečné by default.",
+        operatorCard5Title: "Učí se z výkonu",
+        operatorCard5Text: "Každý run se mění ve strukturovaný důkaz pro další kreativu, kampaň a obchodní rozhodnutí.",
+        whyEyebrow: "Proč na tom záleží",
+        whyTitle: "Většina e-shopů nepotřebuje další nástroj. Potřebuje exekuci.",
+        whyBullet1Title: "Agentury jsou drahé a pomalé.",
+        whyBullet1Text: "Rutinní marketingová práce by neměla stát tisíce měsíčně ještě před tím, než obchod ví, jaký úhel bude fungovat.",
+        whyBullet2Title: "AI obsah bez kontextu skladu je mělký.",
+        whyBullet2Text: "Produktový směr je propojit sklad, marže a kampaňové příležitosti, aby obsah vycházel z reality byznysu.",
+        whyBullet3Title: "Pilot má vytvořit momentum, ne další práci.",
+        whyBullet3Text: "Masthead má dát majitelům funkční obsahovou a kampaňovou smyčku bez dalšího dashboardu, který musí každý den řídit.",
+        roadmapEyebrow: "Roadmapa",
+        roadmapTitle: "Od content enginu k marketingovému operačnímu systému.",
+        roadmapIntro: "Živý prototyp už zvládá klienty, produktové briefy, schvalovací workflow a základy Meta onboardingu.",
+        phase1: "Fáze 1",
+        phase2: "Fáze 2",
+        phase3: "Fáze 3",
+        roadmapCard1Title: "Obsah podle skladu",
+        roadmapCard1Text: "Shopify a Shoptet katalogy, výběr promotovatelných produktů, stock-safe posty, provenance produktových obrázků a klientské schválení.",
+        roadmapCard2Title: "Meta campaign loop",
+        roadmapCard2Text: "Schválené kreativy se mění v reklamy, budgety zůstávají pod limitem, výsledky se vrací do reportingu a vítězové ovlivňují další run.",
+        roadmapCard3Title: "Učení napříč e-shopy",
+        roadmapCard3Text: "Strukturovaná metadata kreativy dělají Masthead chytřejší napříč vertikálami bez odhalování dat jednotlivých klientů.",
+        founderEyebrow: "Zakladatel",
+        founderText: "Postavil Matyáš Kouřil po tom, co sám provozoval e-shop, utrácel výrazné částky v Meta Ads a viděl, kolik každodenního marketingu je opakovatelná operační práce.",
+        founderName: "Matyáš Kouřil - Zakladatel, Masthead",
+        finalEyebrow: "Early access",
+        finalTitle: "Pusťte Masthead do e-shopu ještě před veřejným launchem.",
+        finalText: "Prioritizujeme e-commerce piloty s jasnými produkty, dostatečným katalogem a majitelem, který umí rychle schvalovat.",
+        finalButton: "Do bety",
+        finalMicroline: "Early access pro Shopify a Shoptet e-shopy.",
+        footerDescription: "AI marketing operator pro e-commerce. Postavený v Česku, navržený pro globální operátory.",
+        footerProduct: "Produkt",
+        footerOperator: "Operator loop",
+        footerContact: "Kontakt",
+        footerStatus: "Stav",
+        footerStatus1: "Privátní beta",
+        footerStatus2: "Nejdřív řízené piloty",
+        footerStatus3: "Schválení člověkem by default",
+        footerRights: "© 2026 Masthead. Všechna práva vyhrazena.",
+        footerDisclaimer: "Organické výsledky pochází z interního testovacího účtu a nejsou garancí výsledků klienta.",
+        formInvalid: "Zadejte prosím platnou e-mailovou adresu.",
+        formJoining: "Odesílám...",
+        formGenericError: "Něco se pokazilo. Zkuste to prosím znovu.",
+        formNetworkError: "Síťová chyba. Zkontrolujte připojení a zkuste to znovu."
+      }
+    };
+
+    let currentLanguage = "en";
+
+    function applyLanguage(language) {
+      const lang = TRANSLATIONS[language] ? language : "en";
+      currentLanguage = lang;
+      const dict = TRANSLATIONS[lang];
+      document.documentElement.lang = lang;
+      document.title = dict.metaTitle;
+      document.querySelector('meta[name="description"]')?.setAttribute("content", dict.metaDescription);
+      document.querySelector('meta[property="og:title"]')?.setAttribute("content", dict.metaTitle);
+      document.querySelector('meta[property="og:description"]')?.setAttribute("content", dict.metaDescription);
+      document.querySelector('meta[name="twitter:title"]')?.setAttribute("content", dict.metaTitle);
+      document.querySelector('meta[name="twitter:description"]')?.setAttribute("content", dict.metaDescription);
+
+      document.querySelectorAll("[data-i18n]").forEach((node) => {
+        const key = node.getAttribute("data-i18n");
+        if (dict[key]) node.textContent = dict[key];
+      });
+      document.querySelectorAll("[data-i18n-html]").forEach((node) => {
+        const key = node.getAttribute("data-i18n-html");
+        if (dict[key]) node.innerHTML = dict[key];
+      });
+      document.querySelectorAll("[data-i18n-placeholder]").forEach((node) => {
+        const key = node.getAttribute("data-i18n-placeholder");
+        if (dict[key]) node.setAttribute("placeholder", dict[key]);
+      });
+      document.querySelectorAll("[data-lang-switch]").forEach((button) => {
+        const active = button.getAttribute("data-lang-switch") === lang;
+        button.classList.toggle("is-active", active);
+        button.setAttribute("aria-pressed", String(active));
+      });
+      try {
+        window.localStorage.setItem("masthead-language", lang);
+      } catch (error) {
+        // Language persistence is a convenience only.
+      }
+    }
+
     const nav = document.getElementById("nav");
     const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 8);
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -689,6 +929,18 @@
       else el.classList.add("in");
     });
 
+    document.querySelectorAll("[data-lang-switch]").forEach((button) => {
+      button.addEventListener("click", () => applyLanguage(button.getAttribute("data-lang-switch")));
+    });
+
+    let initialLanguage = "en";
+    try {
+      initialLanguage = window.localStorage.getItem("masthead-language") || "en";
+    } catch (error) {
+      initialLanguage = "en";
+    }
+    applyLanguage(initialLanguage);
+
     const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     function wireForm(formId, btnId, msgId, successId, microGetter) {
@@ -704,9 +956,10 @@
         msg.textContent = "";
         msg.className = "form-msg";
         const email = input.value.trim();
+        const dict = TRANSLATIONS[currentLanguage] || TRANSLATIONS.en;
 
         if (!EMAIL_RE.test(email)) {
-          msg.textContent = "Please enter a valid email address.";
+          msg.textContent = dict.formInvalid;
           msg.classList.add("error");
           input.focus();
           return;
@@ -714,7 +967,7 @@
 
         btn.disabled = true;
         const originalText = btn.textContent;
-        btn.textContent = "Joining...";
+        btn.textContent = dict.formJoining;
 
         try {
           const response = await fetch("/api/waitlist", {
@@ -732,13 +985,13 @@
             success.classList.add("show");
           } else {
             const data = await response.json().catch(() => ({}));
-            msg.textContent = data.error || "Something went wrong. Please try again.";
+            msg.textContent = currentLanguage === "en" && data.error ? data.error : dict.formGenericError;
             msg.classList.add("error");
             btn.disabled = false;
             btn.textContent = originalText;
           }
         } catch (error) {
-          msg.textContent = "Network error. Please check your connection and try again.";
+          msg.textContent = dict.formNetworkError;
           msg.classList.add("error");
           btn.disabled = false;
           btn.textContent = originalText;
