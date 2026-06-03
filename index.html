@@ -129,7 +129,6 @@
     .brand { display: inline-flex; align-items: center; gap: 11px; min-width: 0; }
     .brand-mark { width: 36px; height: 36px; flex: 0 0 36px; }
     .brand-name { font-weight: 800; font-size: 19px; line-height: 1; }
-    .brand-domain { color: var(--muted); font-size: 11px; line-height: 1; margin-top: 5px; }
     .nav-links { display: flex; gap: 24px; align-items: center; color: var(--ink-2); font-size: 14px; font-weight: 700; }
     .nav-links a:hover { color: var(--ink); }
 
@@ -384,7 +383,6 @@
     @media (max-width: 640px) {
       .wrap { width: min(100% - 32px, var(--max)); }
       .nav-inner { height: 64px; }
-      .brand-domain { display: none; }
       .nav-links { gap: 10px; }
       .nav-cta { padding: 10px 12px; }
       .hero { min-height: auto; padding: 74px 0 64px; }
@@ -422,7 +420,6 @@
         </svg>
         <span>
           <span class="brand-name">Masthead</span>
-          <span class="brand-domain">themasthead.cz</span>
         </span>
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
