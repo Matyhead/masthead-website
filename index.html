@@ -238,9 +238,21 @@
       background: rgba(8, 9, 7, 0.54);
       font-size: 13px;
       font-weight: 700;
-      margin-bottom: 24px;
+      margin-bottom: 32px;
     }
-    .hero-status span { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+    .hero-status .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex: 0 0 8px;
+    }
+    .hero-status .status-label {
+      min-width: 0;
+      width: auto;
+      height: auto;
+      background: transparent;
+    }
     .hero-title-line,
     .hero-title-accent {
       display: block;
@@ -511,7 +523,7 @@
       <img class="hero-bg" src="/assets/operator-console.png?v=2" alt="" aria-hidden="true" />
       <div class="wrap">
         <div class="hero-copy">
-          <div class="hero-status reveal"><span></span> <span data-i18n="heroStatus">Private beta for Shopify and Shoptet stores</span></div>
+          <div class="hero-status reveal"><span class="status-dot" aria-hidden="true"></span><span class="status-label" data-i18n="heroStatus">Private beta for Shopify and Shoptet stores</span></div>
           <h1 class="reveal" data-i18n-html="heroTitle"><span class="hero-title-line">AI marketing</span><span class="hero-title-line">operator for</span><span class="hero-title-accent">e-commerce.</span></h1>
           <p class="hero-lede reveal" data-i18n="heroLede">Masthead helps e-commerce teams turn product context into approved organic posts, campaign-ready creative and a learning loop for the next run.</p>
 
