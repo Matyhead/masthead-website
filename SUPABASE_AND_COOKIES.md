@@ -59,6 +59,29 @@ Expected response:
 
 Then check Supabase `Table Editor` -> `waitlist`.
 
+## 3.1 Troubleshooting
+
+If the website says `Something went wrong`, check Vercel logs.
+
+This log means the Vercel environment variable is not using the Supabase
+`service_role` key:
+
+```txt
+new row violates row-level security policy for table "waitlist"
+code: 42501
+```
+
+Fix:
+
+1. Open Supabase -> `Project Settings` -> `API`.
+2. Copy the secret `service_role` key, not the public anon key.
+3. In Vercel -> `Settings` -> `Environment Variables`, replace
+   `SUPABASE_SERVICE_ROLE_KEY` with the service-role key.
+4. Redeploy the latest production deployment.
+
+The anon key is intentionally blocked by RLS because the waitlist table stores
+email addresses.
+
 ## 4. Cookie banner behavior
 
 The banner is designed for EU/Czech expectations:
