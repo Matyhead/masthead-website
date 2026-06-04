@@ -303,6 +303,23 @@
     .form-success.show { display: block; }
     .form-success h3 { font: 800 18px var(--sans); margin-bottom: 3px; }
     .form-success p { font-size: 14px; }
+    .privacy-note {
+      width: min(520px, 100%);
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .privacy-note a { color: var(--ink-2); text-underline-offset: 3px; }
+    .hp-field {
+      position: absolute;
+      left: -10000px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
     .hero-proof {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -530,6 +547,89 @@
     .reveal { opacity: 0; transform: translateY(12px); transition: opacity 0.55s ease, transform 0.55s ease; }
     .reveal.in { opacity: 1; transform: translateY(0); }
 
+    .cookie-consent {
+      position: fixed;
+      inset: auto 18px 18px;
+      z-index: 80;
+      display: none;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .cookie-consent.show { display: flex; }
+    .cookie-card {
+      width: min(760px, 100%);
+      border: 1px solid rgba(247, 244, 236, 0.18);
+      border-radius: 12px;
+      background: rgba(8, 9, 7, 0.96);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+      padding: 18px;
+      pointer-events: auto;
+      backdrop-filter: blur(18px);
+    }
+    .cookie-card h2 {
+      font: 800 18px var(--sans);
+      letter-spacing: 0;
+      margin-bottom: 7px;
+    }
+    .cookie-card p {
+      color: var(--ink-2);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .cookie-actions {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    .cookie-actions .btn {
+      min-height: 40px;
+      padding: 0 15px;
+      font-size: 13px;
+    }
+    .cookie-actions .btn.btn-secondary {
+      background: rgba(247, 244, 236, 0.08);
+      color: var(--ink);
+      border-color: rgba(247, 244, 236, 0.22);
+    }
+    .cookie-actions .btn.btn-plain {
+      background: transparent;
+      color: var(--ink-2);
+      border-color: rgba(247, 244, 236, 0.18);
+    }
+    .cookie-preferences {
+      display: none;
+      margin-top: 14px;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+    .cookie-preferences.open { display: block; }
+    .cookie-option {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(247, 244, 236, 0.08);
+    }
+    .cookie-option:last-child { border-bottom: 0; }
+    .cookie-option input { margin-top: 3px; accent-color: var(--accent); }
+    .cookie-option strong { display: block; color: var(--ink); font-size: 14px; margin-bottom: 2px; }
+    .cookie-option span { display: block; color: var(--muted); font-size: 13px; line-height: 1.45; }
+    .cookie-settings-link {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: var(--ink-2);
+      font: inherit;
+      padding: 0;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .cookie-settings-link:hover { color: var(--accent); }
+
     @media (max-width: 980px) {
       h1 { font-size: 58px; }
       h2 { font-size: 38px; }
@@ -608,6 +708,10 @@
       .founder-card { grid-template-columns: 1fr; }
       .founder-card p { font-size: 19px; }
       .footer-bottom { flex-direction: column; }
+      .cookie-consent { inset: auto 10px 10px; }
+      .cookie-card { padding: 15px; max-height: calc(100vh - 20px); overflow: auto; }
+      .cookie-actions { display: grid; grid-template-columns: 1fr; }
+      .cookie-actions .btn { width: 100%; }
     }
 
     @media (max-width: 480px) {
@@ -692,8 +796,11 @@
           <form class="waitlist reveal" id="waitlist-form" novalidate>
             <label for="email" class="sr-only" data-i18n="emailLabel">Email address</label>
             <input type="email" id="email" name="email" placeholder="you@yourstore.com" data-i18n-placeholder="emailPlaceholder" autocomplete="email" required />
+            <label class="hp-field" for="website">Website</label>
+            <input class="hp-field" type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
             <button type="submit" class="btn" id="submit-btn" data-i18n="heroButton">Request access</button>
           </form>
+          <p class="privacy-note reveal" data-i18n-html="privacyNote">By joining, you agree that Masthead may use your email to contact you about beta access. You can opt out anytime at <a href="mailto:hello@themasthead.cz">hello@themasthead.cz</a>.</p>
           <div class="form-success reveal" id="form-success" role="status" aria-live="polite">
             <h3 data-i18n="successTitle">You're on the list.</h3>
             <p data-i18n="successText">We'll reach out when the next pilot slots open.</p>
@@ -891,8 +998,11 @@
           <form class="waitlist reveal" id="waitlist-form-2" novalidate>
             <label for="email2" class="sr-only" data-i18n="emailLabel">Email address</label>
             <input type="email" id="email2" name="email" placeholder="you@yourstore.com" data-i18n-placeholder="emailPlaceholder" autocomplete="email" required />
+            <label class="hp-field" for="website2">Website</label>
+            <input class="hp-field" type="text" id="website2" name="website" tabindex="-1" autocomplete="off" />
             <button type="submit" class="btn" id="submit-btn-2" data-i18n="finalButton">Join beta</button>
           </form>
+          <p class="privacy-note reveal" data-i18n-html="privacyNote">By joining, you agree that Masthead may use your email to contact you about beta access. You can opt out anytime at <a href="mailto:hello@themasthead.cz">hello@themasthead.cz</a>.</p>
           <div class="form-success reveal" id="form-success-2" role="status" aria-live="polite">
             <h3 data-i18n="successTitle">You're on the list.</h3>
             <p data-i18n="successText">We'll reach out when the next pilot slots open.</p>
@@ -939,9 +1049,40 @@
       <div class="footer-bottom">
         <span data-i18n="footerRights">© 2026 Masthead. All rights reserved.</span>
         <span data-i18n="footerDisclaimer">Organic proof is from an internal test account and is not a client guarantee.</span>
+        <button type="button" class="cookie-settings-link" data-cookie-settings data-i18n="cookieSettingsLink">Cookie settings</button>
       </div>
     </div>
   </footer>
+
+  <div class="cookie-consent" id="cookie-consent" aria-live="polite">
+    <div class="cookie-card" role="dialog" aria-labelledby="cookie-title" aria-describedby="cookie-description">
+      <h2 id="cookie-title" data-i18n="cookieTitle">Cookie choices</h2>
+      <p id="cookie-description" data-i18n="cookieIntro">We use necessary storage to keep this website working. Optional analytics and marketing cookies stay off unless you allow them.</p>
+      <div class="cookie-actions">
+        <button type="button" class="btn btn-secondary" data-cookie-action="reject" data-i18n="cookieReject">Reject all</button>
+        <button type="button" class="btn btn-plain" data-cookie-action="customize" aria-expanded="false" aria-controls="cookie-preferences" data-i18n="cookieCustomize">Customize</button>
+        <button type="button" class="btn btn-secondary" data-cookie-action="accept" data-i18n="cookieAccept">Accept all</button>
+      </div>
+      <div class="cookie-preferences" id="cookie-preferences">
+        <label class="cookie-option">
+          <input type="checkbox" checked disabled />
+          <span><strong data-i18n="cookieNecessaryTitle">Necessary</strong><span data-i18n="cookieNecessaryText">Required for the site and consent settings. Always active.</span></span>
+        </label>
+        <label class="cookie-option">
+          <input type="checkbox" id="cookie-analytics" />
+          <span><strong data-i18n="cookieAnalyticsTitle">Analytics</strong><span data-i18n="cookieAnalyticsText">Helps us understand traffic and improve the landing page.</span></span>
+        </label>
+        <label class="cookie-option">
+          <input type="checkbox" id="cookie-marketing" />
+          <span><strong data-i18n="cookieMarketingTitle">Marketing</strong><span data-i18n="cookieMarketingText">Allows campaign pixels or ad measurement if we add them later.</span></span>
+        </label>
+        <div class="cookie-actions">
+          <button type="button" class="btn btn-secondary" data-cookie-action="save" data-i18n="cookieSave">Save choices</button>
+          <button type="button" class="btn btn-plain" data-cookie-action="reject" data-i18n="cookieReject">Reject all</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>
     const TRANSLATIONS = {
@@ -1037,6 +1178,20 @@
         footerStatus3: "Human approval by default",
         footerRights: "© 2026 Masthead. All rights reserved.",
         footerDisclaimer: "Organic proof is from an internal test account and is not a client guarantee.",
+        privacyNote: "By joining, you agree that Masthead may use your email to contact you about beta access. You can opt out anytime at <a href=\"mailto:hello@themasthead.cz\">hello@themasthead.cz</a>.",
+        cookieSettingsLink: "Cookie settings",
+        cookieTitle: "Cookie choices",
+        cookieIntro: "We use necessary storage to keep this website working. Optional analytics and marketing cookies stay off unless you allow them.",
+        cookieReject: "Reject all",
+        cookieCustomize: "Customize",
+        cookieAccept: "Accept all",
+        cookieSave: "Save choices",
+        cookieNecessaryTitle: "Necessary",
+        cookieNecessaryText: "Required for the site and consent settings. Always active.",
+        cookieAnalyticsTitle: "Analytics",
+        cookieAnalyticsText: "Helps us understand traffic and improve the landing page.",
+        cookieMarketingTitle: "Marketing",
+        cookieMarketingText: "Allows campaign pixels or ad measurement if we add them later.",
         formInvalid: "Please enter a valid email address.",
         formJoining: "Joining...",
         formGenericError: "Something went wrong. Please try again.",
@@ -1134,6 +1289,20 @@
         footerStatus3: "Schválení člověkem by default",
         footerRights: "© 2026 Masthead. Všechna práva vyhrazena.",
         footerDisclaimer: "Organické výsledky pochází z interního testovacího účtu a nejsou garancí výsledků klienta.",
+        privacyNote: "Odesláním souhlasíte s tím, že vás Masthead může kontaktovat ohledně beta přístupu. Kdykoliv se můžete odhlásit na <a href=\"mailto:hello@themasthead.cz\">hello@themasthead.cz</a>.",
+        cookieSettingsLink: "Nastavení cookies",
+        cookieTitle: "Nastavení cookies",
+        cookieIntro: "Používáme nezbytné úložiště pro fungování webu. Volitelná analytika a marketing zůstanou vypnuté, dokud je nepovolíte.",
+        cookieReject: "Odmítnout vše",
+        cookieCustomize: "Upravit",
+        cookieAccept: "Přijmout vše",
+        cookieSave: "Uložit volby",
+        cookieNecessaryTitle: "Nezbytné",
+        cookieNecessaryText: "Nutné pro fungování webu a uložení nastavení souhlasu. Vždy aktivní.",
+        cookieAnalyticsTitle: "Analytika",
+        cookieAnalyticsText: "Pomáhá nám rozumět návštěvnosti a zlepšovat landing page.",
+        cookieMarketingTitle: "Marketing",
+        cookieMarketingText: "Umožní kampanové pixely nebo měření reklam, pokud je později přidáme.",
         formInvalid: "Zadejte prosím platnou e-mailovou adresu.",
         formJoining: "Odesílám...",
         formGenericError: "Něco se pokazilo. Zkuste to prosím znovu.",
@@ -1219,10 +1388,24 @@
 
     const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+    function waitlistMetadata(source) {
+      const url = new URL(window.location.href);
+      return {
+        source,
+        language: currentLanguage,
+        page_path: `${url.pathname}${url.search}`,
+        utm_source: url.searchParams.get("utm_source") || "",
+        utm_medium: url.searchParams.get("utm_medium") || "",
+        utm_campaign: url.searchParams.get("utm_campaign") || ""
+      };
+    }
+
     function wireForm(formId, btnId, msgId, successId, microGetter) {
       const form = document.getElementById(formId);
       if (!form) return;
       const input = form.querySelector('input[type="email"]');
+      const honeypot = form.querySelector('input[name="website"]');
+      const privacyNote = form.nextElementSibling?.classList.contains("privacy-note") ? form.nextElementSibling : null;
       const btn = document.getElementById(btnId);
       const msg = document.getElementById(msgId);
       const success = document.getElementById(successId);
@@ -1249,11 +1432,16 @@
           const response = await fetch("/api/waitlist", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, source: formId === "waitlist-form" ? "hero" : "final-cta" })
+            body: JSON.stringify({
+              email,
+              website: honeypot?.value || "",
+              ...waitlistMetadata(formId === "waitlist-form" ? "hero" : "final-cta")
+            })
           });
 
           if (response.ok) {
             form.style.display = "none";
+            if (privacyNote) privacyNote.style.display = "none";
             if (microGetter) {
               const micro = microGetter();
               if (micro) micro.style.display = "none";
@@ -1277,6 +1465,121 @@
 
     wireForm("waitlist-form", "submit-btn", "form-msg", "form-success", () => document.getElementById("microline"));
     wireForm("waitlist-form-2", "submit-btn-2", "form-msg-2", "form-success-2", null);
+
+    const CONSENT_KEY = "masthead_cookie_consent_v1";
+    const SIX_MONTHS_MS = 1000 * 60 * 60 * 24 * 183;
+    const TWELVE_MONTHS_MS = 1000 * 60 * 60 * 24 * 365;
+
+    function readConsent() {
+      try {
+        const raw = localStorage.getItem(CONSENT_KEY);
+        if (!raw) return null;
+        const saved = JSON.parse(raw);
+        if (!saved || !saved.expiresAt || Date.now() > saved.expiresAt) {
+          localStorage.removeItem(CONSENT_KEY);
+          return null;
+        }
+        return saved;
+      } catch {
+        return null;
+      }
+    }
+
+    function writeConsent(choices) {
+      const hasOptional = Boolean(choices.analytics || choices.marketing);
+      const record = {
+        necessary: true,
+        analytics: Boolean(choices.analytics),
+        marketing: Boolean(choices.marketing),
+        version: "2026-06-04",
+        savedAt: Date.now(),
+        expiresAt: Date.now() + (hasOptional ? TWELVE_MONTHS_MS : SIX_MONTHS_MS)
+      };
+      try {
+        localStorage.setItem(CONSENT_KEY, JSON.stringify(record));
+      } catch {
+        return record;
+      }
+      return record;
+    }
+
+    function loadConsentScripts(category) {
+      const key = category === "marketing" ? "MASTHEAD_MARKETING_SCRIPTS" : "MASTHEAD_ANALYTICS_SCRIPTS";
+      const scripts = Array.isArray(window[key]) ? window[key] : [];
+      scripts.forEach((src) => {
+        if (!src || [...document.scripts].some((script) => script.dataset.consentSrc === src)) return;
+        const script = document.createElement("script");
+        script.src = src;
+        script.async = true;
+        script.dataset.consentSrc = src;
+        document.head.appendChild(script);
+      });
+    }
+
+    function applyConsent(consent) {
+      window.mastheadConsent = consent || { necessary: true, analytics: false, marketing: false };
+      window.dispatchEvent(new CustomEvent("masthead:consent", { detail: window.mastheadConsent }));
+      if (window.mastheadConsent.analytics) loadConsentScripts("analytics");
+      if (window.mastheadConsent.marketing) loadConsentScripts("marketing");
+    }
+
+    function setupCookieConsent() {
+      const banner = document.getElementById("cookie-consent");
+      const preferences = document.getElementById("cookie-preferences");
+      const analyticsInput = document.getElementById("cookie-analytics");
+      const marketingInput = document.getElementById("cookie-marketing");
+      if (!banner || !preferences || !analyticsInput || !marketingInput) return;
+
+      const showBanner = () => banner.classList.add("show");
+      const hideBanner = () => banner.classList.remove("show");
+      const openPreferences = () => {
+        preferences.classList.add("open");
+        banner.querySelector('[data-cookie-action="customize"]')?.setAttribute("aria-expanded", "true");
+      };
+
+      const save = (choices) => {
+        const consent = writeConsent(choices);
+        applyConsent(consent);
+        hideBanner();
+      };
+
+      const saved = readConsent();
+      if (saved) {
+        analyticsInput.checked = Boolean(saved.analytics);
+        marketingInput.checked = Boolean(saved.marketing);
+        applyConsent(saved);
+      } else {
+        showBanner();
+        applyConsent({ necessary: true, analytics: false, marketing: false });
+      }
+
+      banner.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-cookie-action]");
+        if (!button) return;
+        const action = button.getAttribute("data-cookie-action");
+        if (action === "accept") save({ analytics: true, marketing: true });
+        if (action === "reject") save({ analytics: false, marketing: false });
+        if (action === "customize") openPreferences();
+        if (action === "save") {
+          save({
+            analytics: analyticsInput.checked,
+            marketing: marketingInput.checked
+          });
+        }
+      });
+
+      document.querySelectorAll("[data-cookie-settings]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const current = readConsent();
+          analyticsInput.checked = Boolean(current?.analytics);
+          marketingInput.checked = Boolean(current?.marketing);
+          showBanner();
+          openPreferences();
+        });
+      });
+    }
+
+    setupCookieConsent();
   </script>
 </body>
 </html>

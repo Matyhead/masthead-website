@@ -9,7 +9,8 @@ Masthead is positioned as an AI marketing operator for e-commerce stores: it con
 - `index.html` contains the landing page, CSS and small waitlist JavaScript.
 - `api/waitlist.js` is a Vercel serverless endpoint for `POST /api/waitlist`.
 - `og.png`, `favicon.svg` and `assets/operator-console.png` are the visible brand/share assets.
-- `supabase.sql` creates the waitlist table.
+- `supabase.sql` creates or migrates the waitlist table.
+- `SUPABASE_AND_COOKIES.md` contains the deployment guide for Supabase and cookie consent.
 
 ## Local Preview
 
@@ -29,6 +30,17 @@ The static preview is enough for design QA. The waitlist API needs Vercel or `ve
    - `SUPABASE_URL`
    - `SUPABASE_SERVICE_ROLE_KEY`
 4. Deploy the repo on Vercel and attach `themasthead.cz`.
+
+Detailed setup and test commands are in `SUPABASE_AND_COOKIES.md`.
+
+## Cookie Consent
+
+The landing page includes an EU-style consent banner with:
+
+- `Reject all`, `Customize` and `Accept all` on the first layer.
+- Analytics and marketing categories off by default.
+- A footer link for changing choices later.
+- No analytics or marketing script loaded unless consent allows it.
 
 ## Notes
 
