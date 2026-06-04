@@ -16,6 +16,19 @@ function cleanLanguage(value) {
   return ['en', 'cs'].includes(lang) ? lang : 'en';
 }
 
+async function insertWaitlistSignup({ supabaseUrl, supabaseKey, payload }) {
+  return fetch(`${supabaseUrl}/rest/v1/waitlist`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      apikey: supabaseKey,
+      Authorization: `Bearer ${supabaseKey}`,
+      Prefer: 'return=minimal,resolution=ignore-duplicates'
+    },
+    body: JSON.stringify(payload)
+  });
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -58,35 +71,47 @@ export default async function handler(req, res) {
   }
 
   try {
-    const resp = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        apikey: SUPABASE_KEY,
-        Authorization: `Bearer ${SUPABASE_KEY}`,
-        Prefer: 'return=minimal,resolution=ignore-duplicates'
-      },
-      body: JSON.stringify({
-        email,
-        source,
-        language,
-        page_path: pagePath,
-        utm_source: utmSource || null,
-        utm_medium: utmMedium || null,
-        utm_campaign: utmCampaign || null,
-        privacy_consent: true,
-        consent_version: CONSENT_VERSION,
-        consent_text: 'User submitted the Masthead beta waitlist form.'
-      })
+    const fullPayload = {
+      email,
+      source,
+      language,
+      page_path: pagePath,
+      utm_source: utmSource || null,
+      utm_medium: utmMedium || null,
+      utm_campaign: utmCampaign || null,
+      privacy_consent: true,
+      consent_version: CONSENT_VERSION,
+      consent_text: 'User submitted the Masthead beta waitlist form.'
+    };
+    const minimalPayload = { email, source };
+    let resp = await insertWaitlistSignup({
+      supabaseUrl: SUPABASE_URL,
+      supabaseKey: SUPABASE_KEY,
+      payload: fullPayload
     });
+    let detail = '';
 
     if (resp.status === 409) {
       return res.status(200).json({ ok: true, message: "You're already on the list." });
     }
 
     if (!resp.ok) {
-      const detail = await resp.text().catch(() => '');
-      console.error('Supabase insert failed:', resp.status, detail);
+      detail = await resp.text().catch(() => '');
+      console.error('Supabase full insert failed, retrying minimal payload:', resp.status, detail);
+      resp = await insertWaitlistSignup({
+        supabaseUrl: SUPABASE_URL,
+        supabaseKey: SUPABASE_KEY,
+        payload: minimalPayload
+      });
+    }
+
+    if (resp.status === 409) {
+      return res.status(200).json({ ok: true, message: "You're already on the list." });
+    }
+
+    if (!resp.ok) {
+      const retryDetail = await resp.text().catch(() => '');
+      console.error('Supabase insert failed:', resp.status, retryDetail || detail);
       return res.status(502).json({ error: 'Something went wrong. Please try again.' });
     }
 
