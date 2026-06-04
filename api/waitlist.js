@@ -5,6 +5,7 @@
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const SAFE_TEXT_RE = /^[a-zA-Z0-9 _./:#?&=-]{0,160}$/;
 const CONSENT_VERSION = '2026-06-04';
+const RESEND_EMAILS_URL = 'https://api.resend.com/emails';
 
 function cleanText(value, fallback = '', maxLength = 120) {
   const text = (value || '').toString().trim().slice(0, maxLength);
@@ -27,6 +28,95 @@ async function insertWaitlistSignup({ supabaseUrl, supabaseKey, payload }) {
     },
     body: JSON.stringify(payload)
   });
+}
+
+function waitlistEmailContent(language) {
+  if (language === 'cs') {
+    return {
+      subject: 'Jste na waitlistu Mastheadu',
+      text: [
+        'Diky, jste na waitlistu Mastheadu.',
+        '',
+        'Ozveme se, jakmile otevreme dalsi pilotni sloty pro e-commerce tymy.',
+        '',
+        'Masthead pomaha menit produktovy kontext na schvaleny obsah, kampanovou kreativu a learning loop pro dalsi run.',
+        '',
+        'Matyas z Mastheadu',
+        'hello@themasthead.cz'
+      ].join('\n'),
+      html: `
+        <div style="font-family:Inter,Arial,sans-serif;background:#080907;color:#f7f4ec;padding:32px">
+          <div style="max-width:560px;margin:0 auto;border:1px solid rgba(247,244,236,.16);border-radius:12px;padding:28px;background:#10110f">
+            <p style="margin:0 0 14px;color:#72e0b3;font-weight:800;text-transform:uppercase;font-size:12px;letter-spacing:.08em">Masthead beta</p>
+            <h1 style="margin:0 0 14px;font-size:28px;line-height:1.12;color:#f7f4ec">Jste na waitlistu.</h1>
+            <p style="margin:0 0 16px;color:#d8d2c4;line-height:1.6">Diky. Ozveme se, jakmile otevreme dalsi pilotni sloty pro e-commerce tymy.</p>
+            <p style="margin:0 0 22px;color:#a8a295;line-height:1.6">Masthead pomaha menit produktovy kontext na schvaleny obsah, kampanovou kreativu a learning loop pro dalsi run.</p>
+            <p style="margin:0;color:#d8d2c4;line-height:1.5">Matyas z Mastheadu<br><a href="mailto:hello@themasthead.cz" style="color:#72e0b3">hello@themasthead.cz</a></p>
+          </div>
+        </div>
+      `
+    };
+  }
+  return {
+    subject: "You're on the Masthead waitlist",
+    text: [
+      "Thanks, you're on the Masthead waitlist.",
+      '',
+      "We'll reach out when the next pilot slots open for e-commerce teams.",
+      '',
+      'Masthead helps turn product context into approved content, campaign-ready creative and a learning loop for the next run.',
+      '',
+      'Matyas from Masthead',
+      'hello@themasthead.cz'
+    ].join('\n'),
+    html: `
+      <div style="font-family:Inter,Arial,sans-serif;background:#080907;color:#f7f4ec;padding:32px">
+        <div style="max-width:560px;margin:0 auto;border:1px solid rgba(247,244,236,.16);border-radius:12px;padding:28px;background:#10110f">
+          <p style="margin:0 0 14px;color:#72e0b3;font-weight:800;text-transform:uppercase;font-size:12px;letter-spacing:.08em">Masthead beta</p>
+          <h1 style="margin:0 0 14px;font-size:28px;line-height:1.12;color:#f7f4ec">You're on the waitlist.</h1>
+          <p style="margin:0 0 16px;color:#d8d2c4;line-height:1.6">Thanks. We'll reach out when the next pilot slots open for e-commerce teams.</p>
+          <p style="margin:0 0 22px;color:#a8a295;line-height:1.6">Masthead helps turn product context into approved content, campaign-ready creative and a learning loop for the next run.</p>
+          <p style="margin:0;color:#d8d2c4;line-height:1.5">Matyas from Masthead<br><a href="mailto:hello@themasthead.cz" style="color:#72e0b3">hello@themasthead.cz</a></p>
+        </div>
+      </div>
+    `
+  };
+}
+
+async function sendWaitlistConfirmationEmail({ email, language }) {
+  const apiKey = process.env.RESEND_API_KEY;
+  const from = process.env.WAITLIST_FROM_EMAIL || process.env.RESEND_FROM_EMAIL;
+  const replyTo = process.env.WAITLIST_REPLY_TO || 'hello@themasthead.cz';
+  if (!apiKey || !from) {
+    console.info('Waitlist confirmation email skipped: missing RESEND_API_KEY or WAITLIST_FROM_EMAIL.');
+    return { configured: false, sent: false };
+  }
+  const content = waitlistEmailContent(language);
+  const response = await fetch(RESEND_EMAILS_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      from,
+      to: [email],
+      subject: content.subject,
+      html: content.html,
+      text: content.text,
+      reply_to: replyTo,
+      tags: [
+        { name: 'source', value: 'waitlist' },
+        { name: 'language', value: language }
+      ]
+    })
+  });
+  if (!response.ok) {
+    const detail = await response.text().catch(() => '');
+    console.error('Waitlist confirmation email failed:', response.status, detail);
+    return { configured: true, sent: false };
+  }
+  return { configured: true, sent: true };
 }
 
 export default async function handler(req, res) {
@@ -115,7 +205,12 @@ export default async function handler(req, res) {
       return res.status(502).json({ error: 'Something went wrong. Please try again.' });
     }
 
-    return res.status(200).json({ ok: true });
+    const emailResult = await sendWaitlistConfirmationEmail({ email, language }).catch((err) => {
+      console.error('Waitlist confirmation email error:', err);
+      return { configured: true, sent: false };
+    });
+
+    return res.status(200).json({ ok: true, email_sent: Boolean(emailResult.sent) });
   } catch (err) {
     console.error('Waitlist handler error:', err);
     return res.status(500).json({ error: 'Something went wrong. Please try again.' });

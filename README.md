@@ -29,6 +29,9 @@ The static preview is enough for design QA. The waitlist API needs Vercel or `ve
 3. Add these Vercel environment variables:
    - `SUPABASE_URL`
    - `SUPABASE_SERVICE_ROLE_KEY`
+   - `RESEND_API_KEY`
+   - `WAITLIST_FROM_EMAIL`
+   - `WAITLIST_REPLY_TO`
 4. Deploy the repo on Vercel and attach `themasthead.cz`.
 
 Detailed setup and test commands are in `SUPABASE_AND_COOKIES.md`.

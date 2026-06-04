@@ -31,6 +31,9 @@ Add:
 ```txt
 SUPABASE_URL=https://your-project-ref.supabase.co
 SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+RESEND_API_KEY=re_your-api-key
+WAITLIST_FROM_EMAIL=Masthead <hello@themasthead.cz>
+WAITLIST_REPLY_TO=hello@themasthead.cz
 ```
 
 Use the Supabase `Project Settings` -> `API` values.
@@ -38,8 +41,38 @@ Use the Supabase `Project Settings` -> `API` values.
 Important:
 
 - `SUPABASE_SERVICE_ROLE_KEY` belongs only in Vercel environment variables.
+- `RESEND_API_KEY` also belongs only in Vercel environment variables.
 - Do not paste it into `index.html`, browser JavaScript, analytics tools or public docs.
 - Add the variables for `Production`, `Preview` and `Development` if you test with `vercel dev`.
+
+## 2.1 Confirmation email setup
+
+The waitlist endpoint can send a confirmation email after the Supabase insert.
+It uses Resend through a server-side API call, so no email API key is exposed to
+the browser.
+
+1. Create a Resend account.
+2. Add and verify `themasthead.cz` or a sending subdomain such as
+   `mail.themasthead.cz`.
+3. Add the DNS records Resend gives you, especially SPF and DKIM.
+4. Create a Resend API key.
+5. Add these Vercel environment variables:
+
+```txt
+RESEND_API_KEY=re_your-api-key
+WAITLIST_FROM_EMAIL=Masthead <hello@themasthead.cz>
+WAITLIST_REPLY_TO=hello@themasthead.cz
+```
+
+Recommended production sender:
+
+```txt
+Masthead <hello@themasthead.cz>
+```
+
+If Resend says the sender domain is not verified, the waitlist signup will still
+be stored in Supabase, but the confirmation email will be skipped/failed in
+Vercel logs. Verify the domain and redeploy.
 
 ## 3. Test the waitlist endpoint
 
@@ -54,8 +87,12 @@ curl -X POST https://themasthead.cz/api/waitlist ^
 Expected response:
 
 ```json
-{"ok":true}
+{"ok":true,"email_sent":true}
 ```
+
+If `email_sent` is `false`, the Supabase insert worked but Resend is not fully
+configured yet. Check `RESEND_API_KEY`, `WAITLIST_FROM_EMAIL`, domain
+verification and Vercel logs.
 
 Then check Supabase `Table Editor` -> `waitlist`.
 
